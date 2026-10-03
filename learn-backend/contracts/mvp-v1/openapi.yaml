@@ -1,0 +1,841 @@
+openapi: 3.0.3
+info:
+  title: AI 知识闯关 MVP API
+  version: 1.0.0
+  license:
+    name: Proprietary
+  description: |
+    第一版匿名核心闭环的前后端契约。
+    learning_input.text 不声明 maxLength；后端按内容和安全策略判断输入，不能以学习字数门槛拒绝正常问题。
+servers:
+  - url: http://localhost:8000
+    description: 本地开发；部署环境由前端配置实际 HTTPS API 地址
+security: []
+tags:
+  - name: QuizRuns
+    description: 匿名闯关会话
+  - name: Operations
+    description: 进程健康和配置就绪
+
+paths:
+  /api/v1/quiz-runs:
+    post:
+      tags: [QuizRuns]
+      operationId: createQuizRun
+      summary: 根据问题、主题或用户原文同步生成题目
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateQuizRunRequest'
+            examples:
+              shortQuestion:
+                summary: 一句话问题
+                value:
+                  learning_input:
+                    text: RAG 是什么？
+                    declared_type: AUTO
+                  config:
+                    question_count: 5
+                    difficulty: basic
+                    question_types: [single_choice, true_false]
+                    source_policy: AUTO
+      responses:
+        '201':
+          description: 题目已生成并通过质量门禁
+          headers:
+            X-Request-Id:
+              $ref: '#/components/headers/RequestId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizRunResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalError'
+        '502':
+          $ref: '#/components/responses/UpstreamFailure'
+        '504':
+          $ref: '#/components/responses/UpstreamTimeout'
+
+  /api/v1/quiz-runs/{run_id}:
+    get:
+      tags: [QuizRuns]
+      operationId: getQuizRun
+      summary: 获取 60 分钟内的临时闯关会话
+      parameters:
+        - $ref: '#/components/parameters/RunId'
+        - $ref: '#/components/parameters/RequestId'
+      responses:
+        '200':
+          description: 返回已生成或已完成的会话
+          headers:
+            X-Request-Id:
+              $ref: '#/components/headers/RequestId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuizRunDetailResponse'
+        '404':
+          $ref: '#/components/responses/RunNotFound'
+        '410':
+          $ref: '#/components/responses/RunExpired'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/quiz-runs/{run_id}/submit:
+    post:
+      tags: [QuizRuns]
+      operationId: submitQuizRun
+      summary: 提交完整作答并生成本次报告
+      description: |
+        第一次有效提交完成会话。重复提交完全相同作答时返回首次报告；
+        已完成会话提交不同作答时返回 RUN_ALREADY_COMPLETED。
+      parameters:
+        - $ref: '#/components/parameters/RunId'
+        - $ref: '#/components/parameters/RequestId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitQuizRunRequest'
+      responses:
+        '200':
+          description: 判分和报告已完成
+          headers:
+            X-Request-Id:
+              $ref: '#/components/headers/RequestId'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitQuizRunResponse'
+        '404':
+          $ref: '#/components/responses/RunNotFound'
+        '409':
+          $ref: '#/components/responses/RunAlreadyCompleted'
+        '410':
+          $ref: '#/components/responses/RunExpired'
+        '422':
+          $ref: '#/components/responses/InvalidAttempts'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/v1/health:
+    get:
+      tags: [Operations]
+      operationId: getHealth
+      summary: 检查进程是否存活
+      responses:
+        '200':
+          description: 进程存活
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  /api/v1/ready:
+    get:
+      tags: [Operations]
+      operationId: getReadiness
+      summary: 检查必要配置是否存在，不发起收费请求
+      responses:
+        '200':
+          description: 服务可接受生成请求
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadyResponse'
+        '503':
+          description: 必要配置缺失
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadyResponse'
+
+components:
+  parameters:
+    RequestId:
+      name: X-Request-Id
+      in: header
+      required: false
+      description: 客户端生成的请求追踪 ID；缺失或格式非法时由服务端生成。
+      schema:
+        type: string
+        maxLength: 128
+    RunId:
+      name: run_id
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^run_[A-Za-z0-9_-]+$'
+
+  headers:
+    RequestId:
+      description: 最终生效的请求追踪 ID
+      schema:
+        type: string
+
+  responses:
+    UnprocessableEntity:
+      description: 输入为空、包含敏感信息、内容不允许或找不到可靠来源
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            emptyInput:
+              value:
+                request_id: req_example
+                error:
+                  code: EMPTY_INPUT
+                  message: 输入一个问题、主题或资料
+                  retryable: false
+                  details: null
+            sourceNotFound:
+              value:
+                request_id: req_example
+                error:
+                  code: RELIABLE_SOURCE_NOT_FOUND
+                  message: 暂时没有找到可核验的可靠来源
+                  retryable: false
+                  details: null
+    InvalidAttempts:
+      description: 作答缺失、重复、包含未知题目或非法选项
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            request_id: req_example
+            error:
+              code: INVALID_ATTEMPTS
+              message: 作答记录不完整，请检查后重试
+              retryable: false
+              details: null
+    RateLimited:
+      description: 请求频率受限
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            request_id: req_example
+            error:
+              code: RATE_LIMITED
+              message: 请求较多，请稍后重试
+              retryable: true
+              details: null
+    UpstreamFailure:
+      description: 来源抓取或 AI 输出失败
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UpstreamTimeout:
+      description: AI 生成超时
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            request_id: req_example
+            error:
+              code: AI_TIMEOUT
+              message: 这次生成等太久了，请重试
+              retryable: true
+              details: null
+    RunNotFound:
+      description: 会话不存在
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            request_id: req_example
+            error:
+              code: RUN_NOT_FOUND
+              message: 没有找到本次闯关，请重新生成
+              retryable: false
+              details: null
+    RunExpired:
+      description: 会话已超过 60 分钟
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            request_id: req_example
+            error:
+              code: RUN_EXPIRED
+              message: 临时会话已过期，请用原设置重新生成
+              retryable: false
+              details: null
+    RunAlreadyCompleted:
+      description: 已完成会话收到不同的作答
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            request_id: req_example
+            error:
+              code: RUN_ALREADY_COMPLETED
+              message: 本次闯关已完成，不能修改作答
+              retryable: false
+              details: null
+    InternalError:
+      description: 未预期的服务端错误
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            request_id: req_example
+            error:
+              code: INTERNAL_ERROR
+              message: 服务暂时不可用，请携带请求编号反馈
+              retryable: true
+              details: null
+
+  schemas:
+    CreateQuizRunRequest:
+      type: object
+      additionalProperties: false
+      required: [learning_input, config]
+      properties:
+        learning_input:
+          $ref: '#/components/schemas/LearningInput'
+        config:
+          $ref: '#/components/schemas/QuizConfig'
+
+    LearningInput:
+      type: object
+      additionalProperties: false
+      required: [text]
+      properties:
+        text:
+          type: string
+          description: 问题、主题或用户原文；不设置 maxLength，去除首尾空白后不得为空。
+          minLength: 1
+        declared_type:
+          type: string
+          enum: [AUTO, QUESTION, USER_SOURCE]
+          default: AUTO
+
+    QuizConfig:
+      type: object
+      additionalProperties: false
+      required: [question_count, difficulty, question_types, source_policy]
+      properties:
+        question_count:
+          type: integer
+          enum: [5, 10]
+          default: 5
+        difficulty:
+          type: string
+          enum: [basic, advanced]
+          default: basic
+        question_types:
+          type: array
+          minItems: 1
+          maxItems: 2
+          uniqueItems: true
+          items:
+            type: string
+            enum: [single_choice, true_false]
+          default: [single_choice, true_false]
+        source_policy:
+          type: string
+          enum: [AUTO, USER_ONLY, OFFICIAL_ALLOWED]
+          default: AUTO
+        language:
+          type: string
+          enum: [zh-CN]
+          default: zh-CN
+
+    QuizRunResponse:
+      type: object
+      additionalProperties: false
+      required: [request_id, run_id, status, quiz, meta, created_at, expires_at]
+      properties:
+        request_id:
+          type: string
+        run_id:
+          type: string
+        status:
+          type: string
+          enum: [READY]
+        quiz:
+          $ref: '#/components/schemas/Quiz'
+        meta:
+          $ref: '#/components/schemas/GenerationMeta'
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+
+    QuizRunDetailResponse:
+      allOf:
+        - $ref: '#/components/schemas/QuizRunResponseBase'
+        - type: object
+          required: [status]
+          properties:
+            status:
+              type: string
+              enum: [READY, COMPLETED]
+            result:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/QuizResult'
+              nullable: true
+            report:
+              type: object
+              allOf:
+                - $ref: '#/components/schemas/LearningReport'
+              nullable: true
+
+    QuizRunResponseBase:
+      type: object
+      required: [request_id, run_id, quiz, meta, created_at, expires_at]
+      properties:
+        request_id:
+          type: string
+        run_id:
+          type: string
+        quiz:
+          $ref: '#/components/schemas/Quiz'
+        meta:
+          $ref: '#/components/schemas/GenerationMeta'
+        created_at:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+
+    Quiz:
+      type: object
+      additionalProperties: false
+      required: [title, knowledge_points, questions]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 80
+        knowledge_points:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/KnowledgePoint'
+        questions:
+          type: array
+          minItems: 5
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/Question'
+
+    KnowledgePoint:
+      type: object
+      additionalProperties: false
+      required: [id, name, importance]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          minLength: 1
+          maxLength: 60
+        importance:
+          type: integer
+          minimum: 1
+          maximum: 3
+
+    Question:
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - type
+        - knowledge_point_id
+        - stem
+        - options
+        - correct_answers
+        - explanation
+        - difficulty
+        - source_refs
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [single_choice, true_false]
+        knowledge_point_id:
+          type: string
+        stem:
+          type: string
+          minLength: 1
+          maxLength: 500
+        options:
+          type: array
+          minItems: 2
+          maxItems: 4
+          items:
+            $ref: '#/components/schemas/QuestionOption'
+        correct_answers:
+          type: array
+          minItems: 1
+          maxItems: 1
+          uniqueItems: true
+          items:
+            type: string
+        explanation:
+          type: string
+          minLength: 1
+          maxLength: 1000
+        difficulty:
+          type: integer
+          enum: [1, 2]
+          description: 1 为基础，2 为进阶。
+        source_refs:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/SourceReference'
+
+    QuestionOption:
+      type: object
+      additionalProperties: false
+      required: [id, text]
+      properties:
+        id:
+          type: string
+          minLength: 1
+          maxLength: 16
+        text:
+          type: string
+          minLength: 1
+          maxLength: 300
+
+    SourceReference:
+      type: object
+      additionalProperties: false
+      required: [source_id, evidence_quote, location]
+      properties:
+        source_id:
+          type: string
+        evidence_quote:
+          type: string
+          minLength: 1
+          maxLength: 1500
+        location:
+          type: string
+          minLength: 1
+          maxLength: 300
+
+    GenerationMeta:
+      type: object
+      additionalProperties: false
+      required:
+        - input_type
+        - source_policy
+        - sources
+        - prompt_version
+        - model_version
+        - generated_at
+      properties:
+        input_type:
+          type: string
+          enum: [QUESTION, USER_SOURCE, HYBRID]
+        source_policy:
+          type: string
+          enum: [USER_ONLY, OFFICIAL_ALLOWED]
+        sources:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/SourceSummary'
+        prompt_version:
+          type: string
+        model_version:
+          type: string
+        generated_at:
+          type: string
+          format: date-time
+
+    SourceSummary:
+      type: object
+      additionalProperties: false
+      required: [source_id, type, title, content_hash, trust_tier]
+      properties:
+        source_id:
+          type: string
+        type:
+          type: string
+          enum: [USER_TEXT, OFFICIAL_WEB]
+        title:
+          type: string
+          minLength: 1
+          maxLength: 300
+        publisher:
+          type: string
+          nullable: true
+          maxLength: 200
+        url:
+          type: string
+          format: uri
+          nullable: true
+        retrieved_at:
+          type: string
+          format: date-time
+          nullable: true
+        content_hash:
+          type: string
+        trust_tier:
+          type: string
+          enum: [USER_PROVIDED, OFFICIAL_PRIMARY, AUTHORITATIVE_SECONDARY]
+
+    SubmitQuizRunRequest:
+      type: object
+      additionalProperties: false
+      required: [attempts]
+      properties:
+        attempts:
+          type: array
+          minItems: 5
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/Attempt'
+
+    Attempt:
+      type: object
+      additionalProperties: false
+      required: [question_id, selected_answers, duration_ms]
+      properties:
+        question_id:
+          type: string
+        selected_answers:
+          type: array
+          minItems: 1
+          maxItems: 1
+          uniqueItems: true
+          items:
+            type: string
+        duration_ms:
+          type: integer
+          minimum: 0
+          maximum: 86400000
+        confidence:
+          type: string
+          enum: [sure, unsure, guessed]
+          nullable: true
+
+    SubmitQuizRunResponse:
+      type: object
+      additionalProperties: false
+      required: [request_id, run_id, status, result, report, completed_at]
+      properties:
+        request_id:
+          type: string
+        run_id:
+          type: string
+        status:
+          type: string
+          enum: [COMPLETED]
+        result:
+          $ref: '#/components/schemas/QuizResult'
+        report:
+          $ref: '#/components/schemas/LearningReport'
+        completed_at:
+          type: string
+          format: date-time
+
+    QuizResult:
+      type: object
+      additionalProperties: false
+      required: [total, correct, accuracy, duration_ms, question_results]
+      properties:
+        total:
+          type: integer
+          enum: [5, 10]
+        correct:
+          type: integer
+          minimum: 0
+          maximum: 10
+        accuracy:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+        duration_ms:
+          type: integer
+          minimum: 0
+        question_results:
+          type: array
+          minItems: 5
+          maxItems: 10
+          items:
+            $ref: '#/components/schemas/QuestionResult'
+
+    QuestionResult:
+      type: object
+      additionalProperties: false
+      required:
+        - question_id
+        - knowledge_point_id
+        - selected_answers
+        - correct_answers
+        - is_correct
+        - duration_ms
+      properties:
+        question_id:
+          type: string
+        knowledge_point_id:
+          type: string
+        selected_answers:
+          type: array
+          items:
+            type: string
+        correct_answers:
+          type: array
+          items:
+            type: string
+        is_correct:
+          type: boolean
+        duration_ms:
+          type: integer
+          minimum: 0
+
+    LearningReport:
+      type: object
+      additionalProperties: false
+      required: [summary, mastery, error_patterns, next_actions, generated_by]
+      properties:
+        summary:
+          type: string
+          minLength: 1
+          maxLength: 1000
+        mastery:
+          type: array
+          items:
+            $ref: '#/components/schemas/MasteryItem'
+        error_patterns:
+          type: array
+          items:
+            type: string
+            maxLength: 500
+        next_actions:
+          type: array
+          minItems: 1
+          maxItems: 5
+          items:
+            type: string
+            maxLength: 300
+        generated_by:
+          type: string
+          enum: [ai, deterministic_fallback]
+
+    MasteryItem:
+      type: object
+      additionalProperties: false
+      required:
+        - knowledge_point_id
+        - status
+        - correct
+        - total
+        - evidence
+      properties:
+        knowledge_point_id:
+          type: string
+        status:
+          type: string
+          enum: [strong, developing, needs_review]
+        correct:
+          type: integer
+          minimum: 0
+        total:
+          type: integer
+          minimum: 1
+        evidence:
+          type: string
+          minLength: 1
+          maxLength: 300
+
+    ErrorResponse:
+      type: object
+      additionalProperties: false
+      required: [request_id, error]
+      properties:
+        request_id:
+          type: string
+        error:
+          $ref: '#/components/schemas/AppError'
+
+    AppError:
+      type: object
+      additionalProperties: false
+      required: [code, message, retryable, details]
+      properties:
+        code:
+          type: string
+          enum:
+            - EMPTY_INPUT
+            - SENSITIVE_INFORMATION
+            - CONTENT_NOT_ALLOWED
+            - RELIABLE_SOURCE_NOT_FOUND
+            - SOURCE_FETCH_FAILED
+            - RATE_LIMITED
+            - AI_TIMEOUT
+            - AI_OUTPUT_INVALID
+            - INVALID_ATTEMPTS
+            - RUN_NOT_FOUND
+            - RUN_EXPIRED
+            - RUN_ALREADY_COMPLETED
+            - INTERNAL_ERROR
+        message:
+          type: string
+          minLength: 1
+        retryable:
+          type: boolean
+        details:
+          type: object
+          nullable: true
+          additionalProperties: true
+
+    HealthResponse:
+      type: object
+      additionalProperties: false
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [ok]
+
+    ReadyResponse:
+      type: object
+      additionalProperties: false
+      required: [status, checks]
+      properties:
+        status:
+          type: string
+          enum: [ready, not_ready]
+        checks:
+          type: object
+          additionalProperties: false
+          required: [dashscope_api_key, dashscope_base_url, generation_model]
+          properties:
+            dashscope_api_key:
+              type: boolean
+            dashscope_base_url:
+              type: boolean
+            generation_model:
+              type: boolean
