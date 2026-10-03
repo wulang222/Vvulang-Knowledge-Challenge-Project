@@ -20,6 +20,11 @@ def normalize_request_id(value: str | None) -> str:
     return new_request_id()
 
 
+def request_id_from(request: Request) -> str:
+    request_id = getattr(request.state, "request_id", None)
+    return request_id if isinstance(request_id, str) else new_request_id()
+
+
 def install_request_id_middleware(app: FastAPI) -> None:
     @app.middleware("http")
     async def request_id_middleware(request: Request, call_next: RequestHandler) -> Response:

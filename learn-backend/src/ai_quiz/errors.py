@@ -5,9 +5,10 @@ from enum import StrEnum
 from typing import Any
 
 from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
-from ai_quiz.request_id import new_request_id
+from ai_quiz.request_id import request_id_from
 
 logger = logging.getLogger(__name__)
 
@@ -46,13 +47,8 @@ class AppError(Exception):
         self.details = details
 
 
-def _request_id(request: Request) -> str:
-    request_id = getattr(request.state, "request_id", None)
-    return request_id if isinstance(request_id, str) else new_request_id()
-
-
 def _error_response(request: Request, error: AppError) -> JSONResponse:
-    request_id = _request_id(request)
+    request_id = request_id_from(request)
     return JSONResponse(
         status_code=error.status_code,
         headers={"X-Request-Id": request_id},
@@ -73,9 +69,38 @@ def install_exception_handlers(app: FastAPI) -> None:
     async def handle_app_error(request: Request, exc: AppError) -> JSONResponse:
         return _error_response(request, exc)
 
+    @app.exception_handler(RequestValidationError)
+    async def handle_request_validation(
+        request: Request,
+        exc: RequestValidationError,
+    ) -> JSONResponse:
+        if request.url.path.endswith("/submit"):
+            error = AppError(
+                code=ErrorCode.INVALID_ATTEMPTS,
+                message="作答记录不完整，请检查后重试",
+                status_code=422,
+                retryable=False,
+            )
+        else:
+            body = exc.body
+            text = None
+            if isinstance(body, dict):
+                learning_input = body.get("learning_input")
+                if isinstance(learning_input, dict):
+                    candidate = learning_input.get("text")
+                    text = candidate if isinstance(candidate, str) else None
+            is_empty = text is not None and not text.strip()
+            error = AppError(
+                code=ErrorCode.EMPTY_INPUT if is_empty else ErrorCode.CONTENT_NOT_ALLOWED,
+                message=("输入一个问题、主题或资料" if is_empty else "请求参数不符合闯关配置要求"),
+                status_code=422,
+                retryable=False,
+            )
+        return _error_response(request, error)
+
     @app.exception_handler(Exception)
     async def handle_unexpected_error(request: Request, exc: Exception) -> JSONResponse:
-        request_id = _request_id(request)
+        request_id = request_id_from(request)
         logger.exception("Unhandled API error request_id=%s", request_id, exc_info=exc)
         return _error_response(
             request,

@@ -40,6 +40,13 @@ class Settings(BaseSettings):
             "AI_QUIZ_GENERATION_MODEL",
         ),
     )
+    search_model: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices(
+            "DASHSCOPE_SEARCH_MODEL",
+            "AI_QUIZ_SEARCH_MODEL",
+        ),
+    )
 
     def readiness_checks(self) -> dict[str, bool]:
         """Return configuration presence only; never call a paid dependency."""
