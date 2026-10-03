@@ -1,0 +1,236 @@
+page {
+	--paper: #fff8e7;
+	--surface: #fffdf5;
+	--surface-blue: #eef4ff;
+	--surface-red: #fff0eb;
+	--surface-green: #eef8ed;
+	--surface-selected: #e8f0ff;
+	--surface-choice: #edf3ff;
+	--surface-code: #f5efe2;
+	--skin: #ffd7ae;
+	--on-primary: #fff;
+	--ink: #24201b;
+	--muted: #756e63;
+	--blue: #4d78b8;
+	--blue-dark: #315b98;
+	--red: #e4493f;
+	--red-dark: #9d2c25;
+	--yellow: #ffd85a;
+	--green: #58a66a;
+	--line: #d9ceb6;
+	--focus: #1d5fd1;
+	--blue-shadow: rgba(77, 120, 184, 0.2);
+	--font-display: "Smiley Sans", "LXGW WenKai", "Noto Sans SC", sans-serif;
+	--font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+	--font-note: "LXGW WenKai", "KaiTi", "STKaiti", serif;
+	min-height: 100%;
+	color: var(--ink);
+	background-color: var(--paper);
+	background-image: repeating-linear-gradient(
+		0deg,
+		transparent 0 59rpx,
+		rgba(77, 120, 184, 0.065) 59rpx 61rpx
+	);
+	font-family: var(--font-body);
+	font-size: 30rpx;
+	line-height: 1.55;
+}
+
+/* #ifdef H5 */
+* {
+	box-sizing: border-box;
+	scrollbar-color: var(--blue) #efe6d3;
+	scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+	background: #efe6d3;
+}
+
+*::-webkit-scrollbar-thumb {
+	border: 2px solid #efe6d3;
+	border-radius: 999px;
+	background: var(--blue);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background: var(--blue-dark);
+}
+
+button:focus-visible,
+textarea:focus-visible {
+	outline: 3px solid var(--focus);
+	outline-offset: 3px;
+}
+/* #endif */
+
+.page-shell {
+	min-height: 100vh;
+	padding-bottom: calc(44rpx + env(safe-area-inset-bottom));
+}
+
+.page-body {
+	width: 100%;
+	padding: 28rpx 34rpx 48rpx;
+}
+
+.card {
+	padding: 28rpx;
+	border: 4rpx solid var(--ink);
+	border-radius: 28rpx;
+	background: var(--surface);
+}
+
+.card + .card {
+	margin-top: 24rpx;
+}
+
+.card--blue {
+	background: var(--surface-blue);
+}
+.card--red {
+	background: var(--surface-red);
+}
+.card--green {
+	background: var(--surface-green);
+}
+.card--yellow {
+	background: #fff4bd;
+}
+.card--soft {
+	border-color: var(--line);
+}
+
+.card-title {
+	display: block;
+	margin-bottom: 10rpx;
+	font-family: var(--font-display);
+	font-size: 32rpx;
+	font-weight: 900;
+	line-height: 1.3;
+}
+
+.muted {
+	color: var(--muted);
+}
+
+.section-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20rpx;
+	margin: 36rpx 0 18rpx;
+	font-family: var(--font-display);
+	font-size: 34rpx;
+	font-weight: 900;
+}
+
+.status-pill {
+	display: inline-flex;
+	align-items: center;
+	min-height: 42rpx;
+	padding: 4rpx 14rpx;
+	border-radius: 999px;
+	color: var(--blue-dark);
+	background: #e7effb;
+	font-size: 21rpx;
+	font-weight: 900;
+}
+
+.status-pill--success {
+	color: #1f6431;
+	background: #dff1df;
+}
+
+.status-pill--warning {
+	color: #8c4b00;
+	background: #fff0bd;
+}
+
+.status-pill--danger {
+	color: #9d2c25;
+	background: #ffe0dc;
+}
+
+.paper-note {
+	padding: 22rpx 26rpx;
+	transform: rotate(-1deg);
+	border: 3rpx solid var(--ink);
+	background: var(--yellow);
+	box-shadow: 4rpx 4rpx 0 var(--ink);
+	font-family: var(--font-note);
+	font-size: 26rpx;
+	font-weight: 700;
+}
+
+.error-code {
+	display: inline-flex;
+	margin-bottom: 12rpx;
+	padding: 5rpx 14rpx;
+	border: 2rpx solid var(--red);
+	border-radius: 999px;
+	color: var(--red);
+	font-size: 20rpx;
+	font-weight: 900;
+}
+
+.result-callout {
+	padding: 26rpx;
+	border: 4rpx solid var(--green);
+	border-radius: 24rpx;
+	background: var(--surface-green);
+}
+
+.result-callout--error {
+	border-color: var(--red);
+	background: var(--surface-red);
+}
+
+.result-callout__title {
+	display: block;
+	font-family: var(--font-display);
+	font-size: 35rpx;
+	font-weight: 900;
+	line-height: 1.3;
+}
+
+.result-callout__copy {
+	display: block;
+	margin-top: 10rpx;
+	font-size: 26rpx;
+}
+
+.mt-16 {
+	margin-top: 32rpx;
+}
+.mt-12 {
+	margin-top: 24rpx;
+}
+.center {
+	text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	/* #ifdef H5 */
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
+	/* #endif */
+}
+
+@media (forced-colors: active) {
+	.card,
+	.paper-note,
+	.result-callout {
+		box-shadow: none;
+	}
+}
