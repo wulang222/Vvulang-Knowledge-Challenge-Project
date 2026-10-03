@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 知识闯关小程序加载、空、错误与恢复状态 HTML 原型">
+  <title>系统状态与恢复｜AI 知识闯关原型</title>
+  <link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到原型内容</a>
+  <header class="board-header"><div class="board-header__inner"><div class="board-title"><div class="board-title__mark">AI</div><div><h1>AI 知识闯关</h1><p>完整 HTML 原型 · 原创校园漫画风</p></div></div><nav class="board-nav" aria-label="原型分组"><a href="01-core-learning-flow.html">01 核心闯关</a><a href="02-study-review-center.html">02 学习复盘</a><a href="03-sharing-creator.html">03 分享创作</a><a href="04-system-states.html" aria-current="page">04 系统状态</a></nav></div></header>
+  <section class="board-intro" aria-labelledby="board-heading"><div><p class="eyebrow">SYSTEM STATES · 28—36</p><h2 id="board-heading">出错时不丢输入，等待时不编进度，空白时告诉用户下一步</h2><p>本组覆盖骨架屏、空状态、敏感信息检查、生成超时、断网恢复、可靠来源不足、题目反馈、订阅提醒与会话过期。</p></div><div class="review-badge">失败可恢复<br>状态不跳动</div></section>
+
+  <main class="prototype-grid" id="content">
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>28 初始加载</h3><p>预留最终几何，避免页面跳动</p></div><span class="phase-tag">状态</span></header>
+      <section class="phone" aria-label="初始加载状态原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="个人资料" disabled>☻</button><h4>我的学习</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="日历" disabled>▦</button></div>
+        <div class="phone__body">
+          <div class="skeleton line short" aria-hidden="true"></div><div class="skeleton line" style="height:32px" aria-hidden="true"></div><div class="skeleton line short" aria-hidden="true"></div>
+          <div class="skeleton block mt-16" aria-hidden="true"></div>
+          <div class="section-title"><h5>本周状态</h5></div>
+          <div class="metric-strip" aria-hidden="true"><div class="metric"><div class="skeleton line"></div></div><div class="metric"><div class="skeleton line"></div></div><div class="metric"><div class="skeleton line"></div></div></div>
+          <div class="section-title"><h5>继续学习</h5></div>
+          <div class="skeleton block" style="height:78px" aria-hidden="true"></div><div class="skeleton block mt-12" style="height:78px" aria-hidden="true"></div>
+          <p class="center text-muted mt-16" role="status">正在读取本地进度…</p>
+        </div>
+        <nav class="bottom-nav" aria-label="加载状态小程序主导航"><button type="button" onclick="prototypeAction(event)" disabled><span>⌂</span>闯关</button><button type="button" onclick="prototypeAction(event)" class="active" disabled><span>▤</span>学习</button><button type="button" onclick="prototypeAction(event)" disabled><span>☻</span>我的</button></nav>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>29 学习中心空状态</h3><p>空白页只给一个开始动作</p></div><span class="phase-tag">状态</span></header>
+      <section class="phone" aria-label="学习中心空状态原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="个人资料">☻</button><h4>我的学习</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="日历">▦</button></div>
+        <div class="phone__body">
+          <div class="empty-state"><div class="empty-state__icon">🗒️</div><h5>这里还没有学习记录</h5><p>输入一个问题、主题或一段学习资料，完成第一关后，错题和复习计划会出现在这里。</p><button onclick="prototypeAction(event)" class="btn btn--primary" type="button" data-toast="已回到输入页">创建第一个闯关 →</button></div>
+          <div class="paper-note">不知道写什么？一句“RAG 是什么？”也可以开始，系统会查找可靠的官方资料。</div>
+        </div>
+        <nav class="bottom-nav" aria-label="空状态小程序主导航"><button type="button" onclick="prototypeAction(event)"><span>⌂</span>闯关</button><button type="button" onclick="prototypeAction(event)" class="active"><span>▤</span>学习</button><button type="button" onclick="prototypeAction(event)"><span>☻</span>我的</button></nav>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>30 敏感信息检查</h3><p>不限字数，只拦截明确的安全风险</p></div><span class="phase-tag">状态</span></header>
+      <section class="phone" aria-label="敏感信息检查原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>准备闯关</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="隐私说明">ⓘ</button></div>
+        <form class="phone__body no-nav" novalidate onsubmit="event.preventDefault()">
+          <div class="result-callout error" role="alert"><strong>检测到可能的敏感信息</strong><p>输入已保留，生成已暂停。请删除密钥、密码、身份证号或未授权的商业机密。</p></div>
+          <label class="field"><span class="field__label"><span>问题、主题或学习资料</span><span class="status-pill">已暂停</span></span><textarea class="text-area resize-none" aria-invalid="true" aria-describedby="source-error" style="border-color:var(--red)">请根据这段排障记录出题：生产环境 API Key 是 sk-live-••••••，调用接口返回 401。</textarea><span class="field__help field__error" id="source-error">“API Key” 后的内容可能是访问凭证。删除或替换为无效示例后再继续。</span></label>
+          <div class="card yellow"><h5 class="card__title">这不是字数校验</h5><p class="card__meta">一句“RAG 是什么？”可以直接提交；后端会识别问题并查找可靠的官方资料。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-16" type="button" data-toast="敏感片段已替换为 [已隐藏]">一键隐藏敏感片段</button>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-12" type="submit" data-toast="正在重新执行安全检查">重新检查并继续</button>
+        </form>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>31 生成超时</h3><p>保留输入，提供有边界的重试</p></div><span class="phase-tag">状态</span></header>
+      <section class="phone" aria-label="生成超时错误原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>出题暂停</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="帮助">?</button></div>
+        <div class="phone__body no-nav">
+          <div class="empty-state"><div class="empty-state__icon">⌛</div><span class="error-code">AI_TIMEOUT</span><h5>这次生成等太久了</h5><p>你的输入和设置都已保留。可以重试一次，或减少题量后重新生成。</p></div>
+          <div class="card blue"><h5 class="card__title">已经完成</h5><p class="card__meta">✓ 识别输入意图<br>✓ 获取并核验来源<br>✓ 提取 6 个知识点<br>— 生成题目时超时</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="正在重试，本次最多再调用两次">重试生成</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button" data-toast="已返回配置页，资料仍在">减少到 5 题</button>
+          <button onclick="prototypeAction(event)" class="link-btn btn--full mt-16" type="button">返回修改输入</button>
+          <div class="request-id">request_id: req_7B2F-91C0<br>反馈问题时请带上这串编号</div>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>32 断网 / 恢复</h3><p>明确哪些内容仍安全保存在本机</p></div><span class="phase-tag">状态</span></header>
+      <section class="phone" aria-label="断网恢复原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">× ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="退出答题">×</button><h4>第 7 题</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="标记题目">☆</button></div>
+        <div class="phone__body no-nav">
+          <div class="result-callout error" role="alert"><strong>网络断开，答案还没提交</strong><p>你的选择已保存在本机。网络恢复后再提交，不需要重做前 6 题。</p></div>
+          <div class="quiz-progress"><div class="progress"><span style="--progress:60%"></span></div><strong>6 / 10 已保存</strong></div>
+          <span class="question-type">判断 · 模型评估</span><h5 class="question">训练集准确率很高，就一定代表模型在新数据上表现也很好。</h5>
+          <div class="choice-list"><button type="button" onclick="prototypeAction(event)" class="choice" aria-pressed="true" disabled><span class="choice__key">T</span><span>正确</span><span></span></button><button type="button" onclick="prototypeAction(event)" class="choice" disabled><span class="choice__key">F</span><span>错误</span><span></span></button></div>
+          <div class="card yellow mt-16"><h5 class="card__title">本机安全保存</h5><p class="card__meta">当前选择、已答题目、用时和资料版本。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="网络仍未恢复，将继续保留本地答案">重新连接并提交</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button" data-toast="已保存，可稍后恢复">先退出，稍后继续</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>33 未找到可靠来源</h3><p>不生成无依据的题，给出恢复路径</p></div><span class="phase-tag">状态</span></header>
+      <section class="phone" aria-label="未找到可靠来源原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>暂时无法核验来源</h4><span></span></div>
+        <div class="phone__body no-nav">
+          <div class="empty-state"><div class="empty-state__icon">🧭</div><span class="error-code">RELIABLE_SOURCE_NOT_FOUND</span><h5>暂时找不到可核验的官方资料</h5><p>你的输入已正常接收。由于没有找到足够可靠的依据，本次不会用模型常识凑题。</p></div>
+          <div class="card red"><h5 class="card__title">可能的原因</h5><p class="card__meta">• 主题名称存在歧义<br>• 官方页面暂时无法访问<br>• 不同来源的关键事实互相冲突</p></div>
+          <div class="card yellow mt-12"><h5 class="card__title">下一步</h5><p class="card__meta">换一个更具体的问法，或粘贴你认可的原文；系统会优先使用原文，并把官方补充来源单独标注。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="已返回输入页，原输入仍保留">换个问法 →</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button" data-toast="已打开来源输入">指定来源或添加资料</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>34 题目问题反馈</h3><p>标签明确，反馈后从个人练习下线</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="题目问题反馈原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="关闭反馈">×</button><h4>反馈这道题</h4><span></span></div>
+        <form class="phone__body no-nav" novalidate onsubmit="event.preventDefault()">
+          <div class="card soft"><span class="question-type">Q-07 · 单选题</span><h5 class="card__title mt-8">训练集准确率高是否代表泛化能力好？</h5><p class="card__meta">反馈不会影响你本次已经计算的分数。</p></div>
+          <fieldset style="border:0;padding:0;margin:16px 0"><legend class="field__label">哪里有问题？</legend><div class="choice-list" data-choice-group>
+            <button onclick="prototypeAction(event)" class="choice" type="button" data-choice aria-pressed="false"><span class="choice__key">1</span><span>正确答案不对</span><span></span></button>
+            <button onclick="prototypeAction(event)" class="choice" type="button" data-choice aria-pressed="false"><span class="choice__key">2</span><span>题目或答案不清楚</span><span></span></button>
+            <button onclick="prototypeAction(event)" class="choice" type="button" data-choice aria-pressed="false"><span class="choice__key">3</span><span>内容没有可靠来源</span><span></span></button>
+            <button onclick="prototypeAction(event)" class="choice" type="button" data-choice aria-pressed="false"><span class="choice__key">4</span><span>解析或证据有问题</span><span></span></button>
+          </div></fieldset>
+          <label class="field"><span class="field__label">补充说明（可选）</span><textarea class="text-area resize-none" style="height:96px" placeholder="例如：引用的官方页面没有说明测试集表现。"></textarea></label>
+          <div class="card yellow"><p class="mb-0 card__meta">提交后，该题会从你的后续练习中暂时下线并进入待复核状态。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="submit" data-toast="反馈已提交，题目已暂时下线">提交反馈</button>
+        </form>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>35 复习提醒订阅</h3><p>用户主动授权，可随时关闭</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="复习提醒订阅原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>复习提醒</h4><span></span></div>
+        <div class="phone__body no-nav">
+          <div class="empty-state" style="padding-bottom:12px"><div class="empty-state__icon">⏰</div><h5>在快忘的时候叫你回来</h5><p>根据本次掌握度安排 1 / 3 / 7 天复习。每次提醒前都需要你的订阅授权。</p></div>
+          <div class="card"><div class="toggle-row"><span><strong>明天 · 错题快练</strong><br><small class="text-muted">10 月 3 日 20:00</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="true" aria-label="开启明天提醒"></button></div><div class="toggle-row"><span><strong>3 天后 · 薄弱点复测</strong><br><small class="text-muted">10 月 5 日 20:00</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="true" aria-label="开启三天后提醒"></button></div><div class="toggle-row"><span><strong>7 天后 · 完整复测</strong><br><small class="text-muted">10 月 9 日 20:00</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="false" aria-label="开启七天后提醒"></button></div></div>
+          <label class="field"><span class="field__label">提醒时间</span><select class="select-input"><option>20:00</option><option>08:00</option><option>12:30</option></select><span class="field__help">按你的本地时间显示。</span></label>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="已保存提醒设置">保存提醒设置</button>
+          <p class="privacy-note">系统不会连续催促；关闭提醒不会影响学习记录。</p>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>36 会话已过期</h3><p>用本地内容重新生成，不冒充旧结果</p></div><span class="phase-tag">状态</span></header>
+      <section class="phone" aria-label="会话过期原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回首页">⌂</button><h4>需要重新生成</h4><span></span></div>
+        <div class="phone__body no-nav">
+          <div class="empty-state"><div class="empty-state__icon">🧾</div><span class="error-code">RUN_EXPIRED</span><h5>临时会话已过期</h5><p>后端临时题目已清除，但本机仍保留用户输入、来源策略和闯关设置。</p></div>
+          <div class="card blue"><h5 class="card__title">可以恢复这些内容</h5><p class="card__meta">✓ 问题、主题或原始学习文本<br>✓ 官方来源检索策略<br>✓ 题量、难度和题型设置</p></div>
+          <div class="card red mt-12"><h5 class="card__title">不能恢复</h5><p class="card__meta">旧题目、旧答案和未完成成绩。重新生成后题目可能不同。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="已用本地输入和来源策略重新发起生成">用原设置重新生成 →</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button" data-toast="已返回输入页">先修改输入</button>
+          <div class="request-id">run_id: run_expired_5E8A<br>本地缓存版本: ai-quiz:run:v1</div>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+  </main>
+  <script src="assets/prototype.js"></script>
+</body>
+</html>

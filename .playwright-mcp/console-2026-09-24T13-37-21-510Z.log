@@ -1,0 +1,5 @@
+[     374ms] [INFO] %c[__httpRequest]:%c httpRequest GET https://chat.deepseek.com/api/v0/ip_to_country_code color: blue;  {payload: Object}  @ https://www.deepseek.com/_next/static/chunks/9767-6ac1711026464664.js:0
+[     386ms] [INFO] %c[__pageVisit]:%c 访问页面 [/] [0]：382ms color: blue;  {payload: Object}  @ https://www.deepseek.com/_next/static/chunks/9767-6ac1711026464664.js:0
+[     386ms] [INFO] %c[__tti]:%c / TTI 上报：383ms color: blue;  {payload: Object}  @ https://www.deepseek.com/_next/static/chunks/9767-6ac1711026464664.js:0
+[    2569ms] [INFO] %c[__httpResponse]:%c httpResponse GET https://chat.deepseek.com/api/v0/ip_to_country_code, 2195ms, reason: none color: blue;  {payload: Object}  @ https://www.deepseek.com/_next/static/chunks/9767-6ac1711026464664.js:0
+[    2569ms] [INFO] %c[__getIpFromApiOk]:%c 通过 API 获取地区信息，IP：121.28.145.68，Region：CN color: blue;  {payload: Object}  @ https://www.deepseek.com/_next/static/chunks/9767-6ac1711026464664.js:0

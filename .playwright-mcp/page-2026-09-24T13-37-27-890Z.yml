@@ -1,0 +1,133 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link [ref=e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - button "获取 APP" [ref=e21] [cursor=pointer]
+          - generic:
+            - generic:
+              - img "QR Code"
+              - generic: 扫码下载 DeepSeek App
+        - generic [ref=e23]:
+          - button "中文" [ref=e24] [cursor=pointer]
+          - button "EN" [ref=e25] [cursor=pointer]
+    - generic:
+      - generic:
+        - link:
+          - /url: /
+        - button
+      - navigation:
+        - link "DeepSeek 网页版":
+          - /url: https://chat.deepseek.com/
+        - link "DeepSeek 手机应用":
+          - /url: https://download.deepseek.com/
+        - link "API 开放平台":
+          - /url: https://platform.deepseek.com/
+        - link "DeepSeek Harness":
+          - /url: /harness/
+        - link "API 文档":
+          - /url: https://api-docs.deepseek.com/zh-cn/
+        - link "加入我们":
+          - /url: https://talent.deepseek.com/
+      - generic:
+        - generic:
+          - button "中文"
+          - button "EN"
+    - main [ref=e26]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - link [ref=e34] [cursor=pointer]:
+            - /url: /news/deepseek-v4-1-flash/
+          - heading "探索未至之境" [level=1] [ref=e41]
+        - generic [ref=e42]:
+          - generic [ref=e43]:
+            - textbox "问点什么，一起探索" [ref=e44]
+            - generic [ref=e45]:
+              - generic [ref=e46]:
+                - button "深度思考" [ref=e47] [cursor=pointer]
+                - button "智能搜索" [pressed] [ref=e52] [cursor=pointer]
+              - button [ref=e56] [cursor=pointer]
+          - generic [ref=e59]:
+            - link "和 DeepSeek 对话" [ref=e60] [cursor=pointer]:
+              - /url: https://chat.deepseek.com/
+            - link "使用 API 开放平台" [ref=e63] [cursor=pointer]:
+              - /url: https://platform.deepseek.com/
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - generic [ref=e85]:
+              - link "浙ICP备2023025841号" [ref=e86] [cursor=pointer]:
+                - /url: https://beian.miit.gov.cn/
+              - link "浙B2-20250178" [ref=e87] [cursor=pointer]:
+                - /url: https://tsm.miit.gov.cn/dxxzsp/xkz/xkzgl/resource/qiyesearch.jsp?num=%E6%B5%99B2-20250178&type=xuke
+              - link "浙公网安备33010502011812号" [ref=e88] [cursor=pointer]:
+                - /url: https://beian.mps.gov.cn/#/query/webSearch?code=33010502011812
+            - generic [ref=e89]:
+              - link "Email" [ref=e91] [cursor=pointer]:
+                - /url: mailto:service@deepseek.com
+              - link "GitHub" [ref=e95] [cursor=pointer]:
+                - /url: https://github.com/deepseek-ai
+              - generic [ref=e98]:
+                - generic "WeChat" [ref=e100]
+                - generic:
+                  - generic:
+                    - img "QR Code"
+                    - generic: 扫码关注公众号
+              - link "Zhihu" [ref=e104] [cursor=pointer]:
+                - /url: https://www.zhihu.com/org/deepseek-75
+              - link "RedNote" [ref=e109] [cursor=pointer]:
+                - /url: https://www.xiaohongshu.com/user/profile/66821202000000001b01a005
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - paragraph [ref=e115]: 产品
+              - generic [ref=e116]:
+                - link "DeepSeek 网页版" [ref=e117] [cursor=pointer]:
+                  - /url: https://chat.deepseek.com/
+                - link "DeepSeek 手机应用" [ref=e118] [cursor=pointer]:
+                  - /url: https://download.deepseek.com/
+                - link "DeepSeek Harness" [ref=e119] [cursor=pointer]:
+                  - /url: /harness/
+                - link "API 开放平台" [ref=e120] [cursor=pointer]:
+                  - /url: https://platform.deepseek.com/
+                - link "API 文档" [ref=e121] [cursor=pointer]:
+                  - /url: https://api-docs.deepseek.com/zh-cn/
+                - link "API 价格" [ref=e122] [cursor=pointer]:
+                  - /url: https://api-docs.deepseek.com/zh-cn/quick_start/pricing
+                - link "服务状态" [ref=e123] [cursor=pointer]:
+                  - /url: https://status.deepseek.com/
+            - generic [ref=e124]:
+              - paragraph [ref=e125]: 研究
+              - generic [ref=e126]:
+                - link "DeepSeek V4.1" [ref=e127] [cursor=pointer]:
+                  - /url: /news/deepseek-v4-1-flash/
+                - link "DeepSeek V4" [ref=e128] [cursor=pointer]:
+                  - /url: /news/v4-preview/
+                - link "DeepSeek V3.2" [ref=e129] [cursor=pointer]:
+                  - /url: /news/deepseek-v3-2/
+                - link "DeepSeek V3.1" [ref=e130] [cursor=pointer]:
+                  - /url: /news/deepseek-v3-1/
+                - link "DeepSeek R1" [ref=e131] [cursor=pointer]:
+                  - /url: /news/r1-0528/
+                - link "DeepSeek V3" [ref=e132] [cursor=pointer]:
+                  - /url: /news/deepseek-v3/
+                - link "更多" [ref=e133] [cursor=pointer]:
+                  - /url: /news/
+            - generic [ref=e134]:
+              - paragraph [ref=e135]: 法务 & 安全
+              - generic [ref=e136]:
+                - link "隐私政策" [ref=e137] [cursor=pointer]:
+                  - /url: https://cdn.deepseek.com/policies/zh-CN/deepseek-privacy-policy.html
+                - link "用户协议" [ref=e138] [cursor=pointer]:
+                  - /url: https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html
+                - link "反馈安全漏洞" [ref=e139] [cursor=pointer]:
+                  - /url: mailto:security@deepseek.com
+                - link "透明度" [ref=e140] [cursor=pointer]:
+                  - /url: /transparency/
+            - generic [ref=e141]:
+              - paragraph [ref=e142]: 加入我们
+              - link "岗位详情" [ref=e144] [cursor=pointer]:
+                - /url: https://talent.deepseek.com/
+        - paragraph [ref=e146]: © 2026 杭州深度求索人工智能基础技术研究有限公司 版权所有
+  - alert [ref=e147]

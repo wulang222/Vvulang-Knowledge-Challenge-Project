@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 知识闯关小程序分享与创作者功能 HTML 原型">
+  <title>分享与创作者｜AI 知识闯关原型</title>
+  <link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到原型内容</a>
+  <header class="board-header"><div class="board-header__inner"><div class="board-title"><div class="board-title__mark">AI</div><div><h1>AI 知识闯关</h1><p>完整 HTML 原型 · 原创校园漫画风</p></div></div><nav class="board-nav" aria-label="原型分组"><a href="01-core-learning-flow.html">01 核心闯关</a><a href="02-study-review-center.html">02 学习复盘</a><a href="03-sharing-creator.html" aria-current="page">03 分享创作</a><a href="04-system-states.html">04 系统状态</a></nav></div></header>
+  <section class="board-intro" aria-labelledby="board-heading"><div><p class="eyebrow">SHARE &amp; CREATOR · 19—27</p><h2 id="board-heading">分享挑战，不分享私密资料；发布内容，先经过人工确认</h2><p>本组覆盖报告分享、好友挑战、公开学习包、创作者中心、学习包编辑、题目审核、发布确认、数据统计与复习提醒。</p></div><div class="review-badge">默认脱敏<br>人工审核</div></section>
+
+  <main class="prototype-grid" id="content">
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>19 分享范围设置</h3><p>默认隐藏原文、文件名和成绩</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="分享范围设置原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>分享这次结果</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="分享隐私说明">ⓘ</button></div>
+        <div class="phone__body no-nav">
+          <div class="paper-note">分享卡只显示你主动选择的内容。原始资料、私有文件名和证据片段永远不进入分享卡。</div>
+          <div class="section-title"><h5>分享类型</h5></div>
+          <div class="segmented"><button type="button" onclick="prototypeAction(event)" class="segment active">成绩报告</button><button type="button" onclick="prototypeAction(event)" class="segment">好友挑战</button></div>
+          <div class="section-title"><h5>别人能看到</h5></div>
+          <div class="card">
+            <div class="toggle-row"><span><strong>正确率</strong><br><small class="text-muted">80% · 8/10 题</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="true" aria-label="分享正确率"></button></div>
+            <div class="toggle-row"><span><strong>学习用时</strong><br><small class="text-muted">6 分 42 秒</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="false" aria-label="分享学习用时"></button></div>
+            <div class="toggle-row"><span><strong>薄弱知识点</strong><br><small class="text-muted">只显示名称，不含原文</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="true" aria-label="分享薄弱知识点"></button></div>
+            <div class="toggle-row"><span><strong>昵称</strong><br><small class="text-muted">显示为“认真复习的同学”</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="false" aria-label="分享昵称"></button></div>
+          </div>
+          <div class="section-title"><h5>预览</h5><button type="button" onclick="prototypeAction(event)" class="link-btn">更换卡片</button></div>
+          <div class="share-card"><div class="share-card__top"><span class="status-pill success">已完成</span><strong>AI 知识闯关</strong></div><h5>这次答对 8 / 10</h5><p>“分类与回归”还要再练两题。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="已生成脱敏分享卡">生成分享卡 →</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>20 报告分享卡</h3><p>可保存或直接转发微信</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="报告分享卡原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>分享卡预览</h4><span></span></div>
+        <div class="phone__body no-nav">
+          <div class="share-card">
+            <div class="share-card__top"><span class="status-pill success">本次闯关</span><span>10.02</span></div>
+            <h5>监督学习基础<br>拿下 8 / 10 题</h5>
+            <p>已掌握 3 个 · 待复习 2 个</p>
+            <hr class="divider">
+            <div class="metric-strip"><div class="metric"><strong>80%</strong><span>正确率</span></div><div class="metric"><strong>4</strong><span>最高连对</span></div><div class="metric"><strong>2</strong><span>待复习</span></div></div>
+            <div class="mascot-row mt-16"><div class="mascot" aria-hidden="true"><span class="mascot__head"><span class="mascot__face">•ᴗ•</span></span></div><div class="speech">我还差“分类与回归”这关，先去补题！</div></div>
+            <div class="share-card__top"><div class="qr-placeholder" role="img" aria-label="小程序码占位"></div><div><strong>扫码来挑战</strong><p>题目来自公开挑战包<br>不含我的原始资料</p></div></div>
+            <p class="footnote">AI 辅助生成 · 已通过来源证据检查</p>
+          </div>
+          <div class="button-row mt-16"><button onclick="prototypeAction(event)" class="btn" type="button" data-toast="分享卡已保存到相册">保存图片</button><button onclick="prototypeAction(event)" class="btn btn--primary" type="button" data-toast="已打开微信分享面板">转发微信</button></div>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button">返回调整公开内容</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>21 好友挑战入口</h3><p>先说明来源与公开范围</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="好友挑战入口原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="关闭">×</button><h4>好友发来一关</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="更多">•••</button></div>
+        <div class="phone__body no-nav">
+          <div class="mascot-row"><div class="mascot" aria-hidden="true"><span class="mascot__head"><span class="mascot__face">•̀ᴗ•́</span></span></div><div class="speech">“认真复习的同学”答对 8 题。你能超过吗？</div></div>
+          <div class="card yellow center"><span class="question-type">公开挑战包</span><h5 class="card__title mt-12" style="font-size:25px">监督学习基础</h5><p class="card__meta">10 题 · 基础到进阶 · 约 6 分钟</p><div class="score-stats"><div class="stat"><strong>6</strong><span>知识点</span></div><div class="stat"><strong>10</strong><span>题目</span></div><div class="stat"><strong>92%</strong><span>题目通过率</span></div></div></div>
+          <div class="section-title"><h5>会考什么</h5></div>
+          <div class="chip-row"><span class="chip">监督学习</span><span class="chip">标签</span><span class="chip">分类</span><span class="chip">回归</span><span class="chip">模型评估</span></div>
+          <div class="card blue mt-16"><h5 class="card__title">资料隐私说明</h5><p class="card__meta">你只会看到审核后的题目、解析和必要证据摘要，不会看到创建者的原始文件。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="挑战已开始">接受挑战 →</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button">先收藏，晚点做</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>22 好友挑战结果</h3><p>对比成绩，但不公开敏感信息</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="好友挑战结果原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="关闭">×</button><h4>挑战完成</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="分享">↗</button></div>
+        <div class="phone__body no-nav">
+          <div class="score-hero"><div class="score-hero__number">9<span style="font-size:24px">/10</span></div><div class="score-hero__label">超过发起者 1 题</div></div>
+          <div class="section-title"><h5>这次对比</h5></div>
+          <div class="card"><div class="toggle-row"><span><strong>你</strong><br><small class="text-muted">9 题正确 · 5分58秒</small></span><span class="status-pill success">领先 1 题</span></div><div class="toggle-row"><span><strong>认真复习的同学</strong><br><small class="text-muted">8 题正确 · 未公开用时</small></span><span class="status-pill">发起者</span></div></div>
+          <div class="section-title"><h5>共同薄弱点</h5></div>
+          <div class="card red"><h5 class="card__title">模型评估</h5><p class="card__meta">你们都答错了“训练集准确率高是否代表泛化好”。</p><button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-12" type="button" data-toast="已生成共同练习">一起补两题</button></div>
+          <div class="paper-note mt-16">比的是这次作答，不给学习能力下结论。挑战结果默认只对参与者可见。</div>
+          <div class="button-row"><button onclick="prototypeAction(event)" class="btn" type="button">再来一局</button><button onclick="prototypeAction(event)" class="btn btn--primary" type="button" data-toast="已回传挑战结果">回传结果</button></div>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>23 公开学习包详情</h3><p>展示审核状态和版本信息</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="公开学习包详情原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>学习包</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="更多">•••</button></div>
+        <div class="phone__body no-nav">
+          <div class="card yellow"><span class="status-pill success">创建者已审核</span><h5 class="card__title mt-12" style="font-size:24px">产品经理 AI 基础面试</h5><p class="card__meta">吴老师创建 · 更新于 2026-09-28</p></div>
+          <div class="metric-strip mt-12"><div class="metric"><strong>15</strong><span>题目</span></div><div class="metric"><strong>892</strong><span>挑战人次</span></div><div class="metric"><strong>74%</strong><span>完成率</span></div></div>
+          <div class="section-title"><h5>包含 7 个知识点</h5></div>
+          <div class="chip-row"><span class="chip">大模型基础</span><span class="chip">RAG</span><span class="chip">Prompt</span><span class="chip">评测</span><span class="chip">产品指标</span></div>
+          <div class="section-title"><h5>你将获得</h5></div>
+          <div class="card blue"><p class="mb-0">✓ 逐题解析与证据摘要<br>✓ 知识点掌握报告<br>✓ 错题再练与 3 天复测</p></div>
+          <div class="card soft mt-12"><h5 class="card__title">AI 内容说明</h5><p class="card__meta">题目由 AI 辅助生成，创建者逐题审核。遇到答案不清或超出资料，可随时反馈。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="学习包已加入我的学习">开始 15 题闯关 →</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button" data-toast="已收藏学习包">收藏</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>24 创作者中心</h3><p>先看完成率和难题，不追虚荣指标</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="创作者中心原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>创作者中心</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="帮助">?</button></div>
+        <div class="phone__body no-nav">
+          <div class="hero-copy"><span class="hero-copy__kicker">本周数据</span><h5>学员在哪一题<br>停住了？</h5><p>先解决题目质量和学习阻力，再看分享次数。</p></div>
+          <div class="metric-strip"><div class="metric"><strong>74%</strong><span>完成率</span></div><div class="metric"><strong>3.2%</strong><span>题目反馈率</span></div><div class="metric"><strong>38%</strong><span>二次达标</span></div></div>
+          <div class="section-title"><h5>我的学习包</h5><button type="button" onclick="prototypeAction(event)" class="link-btn">＋ 新建</button></div>
+          <button type="button" onclick="prototypeAction(event)" class="creator-row"><span class="thumb">AI</span><span><span class="row-title">产品经理 AI 基础面试</span><span class="row-meta">已发布 · 892 人挑战</span></span><span class="status-pill success">健康</span></button>
+          <button type="button" onclick="prototypeAction(event)" class="creator-row"><span class="thumb">网</span><span><span class="row-title">计算机网络期末冲刺</span><span class="row-meta">草稿 · 12/15 题已审核</span></span><span class="status-pill warning">待审</span></button>
+          <button type="button" onclick="prototypeAction(event)" class="creator-row"><span class="thumb">新</span><span><span class="row-title">新员工安全培训</span><span class="row-meta">已暂停 · 有 4 条反馈</span></span><span class="status-pill danger">需处理</span></button>
+          <div class="section-title"><h5>最需要处理</h5></div>
+          <div class="card red"><span class="error-code">题目 Q-07</span><h5 class="card__title">正确率仅 31%，收到 6 条“答案不清”</h5><p class="card__meta">建议暂停该题并重新审核证据和选项。</p><button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-12" type="button">去审核题目</button></div>
+        </div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>25 学习包编辑</h3><p>信息、范围与公开设置</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="学习包编辑原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="取消编辑">×</button><h4>编辑学习包</h4><button type="button" onclick="prototypeAction(event)" class="link-btn" data-toast="草稿已保存">保存</button></div>
+        <form class="phone__body no-nav" novalidate onsubmit="event.preventDefault()">
+          <label class="field"><span class="field__label"><span>学习包名称</span><span>12 / 30</span></span><input type="text" class="text-input" value="计算机网络期末冲刺"><span class="field__help">名称会显示在搜索、分享卡和挑战页。</span></label>
+          <label class="field"><span class="field__label"><span>一句话说明</span><span>28 / 60</span></span><textarea class="text-area resize-none" style="height:96px">覆盖 TCP、HTTP 与网络层核心考点，适合期末前快速自测。</textarea></label>
+          <div class="section-title"><h5>题目范围</h5><button type="button" onclick="prototypeAction(event)" class="link-btn">编辑知识点</button></div>
+          <div class="chip-row"><span class="chip" aria-pressed="true">TCP</span><span class="chip" aria-pressed="true">HTTP</span><span class="chip" aria-pressed="true">网络层</span><span class="chip">DNS</span></div>
+          <div class="section-title"><h5>公开设置</h5></div>
+          <div class="card"><div class="toggle-row"><span><strong>允许公开挑战</strong><br><small class="text-muted">只公开题目与必要证据摘要</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="true" aria-label="允许公开挑战"></button></div><div class="toggle-row"><span><strong>显示创建者名称</strong><br><small class="text-muted">当前：吴老师</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="true" aria-label="显示创建者名称"></button></div></div>
+          <div class="card yellow mt-12"><h5 class="card__title">发布前还差 3 题审核</h5><p class="card__meta">未人工确认答案与证据的题目不会进入公开学习包。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="submit" data-toast="已进入待审核题目列表">继续审核 3 题 →</button>
+        </form>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>26 题目人工审核</h3><p>先核对证据，再允许发布</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="题目人工审核原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>审核题目 12 / 15</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="审核说明">?</button></div>
+        <div class="phone__body no-nav">
+          <div class="quiz-progress"><div class="progress"><span style="--progress:80%"></span></div><strong>80%</strong></div>
+          <span class="question-type">单选 · TCP 状态转换</span>
+          <h5 class="question">主动关闭连接的一方，在发送 FIN 后通常进入什么状态？</h5>
+          <div class="choice-list"><div class="choice"><span class="choice__key">A</span><span>CLOSED</span><span></span></div><div class="choice correct"><span class="choice__key">B</span><span>FIN_WAIT_1</span><span class="choice__mark">✓</span></div><div class="choice"><span class="choice__key">C</span><span>LAST_ACK</span><span></span></div><div class="choice"><span class="choice__key">D</span><span>TIME_WAIT</span><span></span></div></div>
+          <details class="card blue mt-12" open><summary><strong>答案解析与证据</strong></summary><p class="card__meta mt-8">主动关闭方发送 FIN 后进入 FIN_WAIT_1，等待对方确认。</p><div class="evidence">“主动关闭的一方发送 FIN 后，状态由 ESTABLISHED 变为 FIN_WAIT_1。”<cite>资料第 8 页 · 第 3 段</cite></div></details>
+          <fieldset style="border:0;padding:0;margin:14px 0"><legend class="field__label">这道题可以发布吗？</legend><div class="segmented three"><button onclick="prototypeAction(event)" class="segment active" type="button">通过</button><button onclick="prototypeAction(event)" class="segment" type="button">修改</button><button onclick="prototypeAction(event)" class="segment" type="button">淘汰</button></div></fieldset>
+          <label class="field"><span class="field__label">审核备注（仅创建者可见）</span><input type="text" class="text-input" placeholder="可选"></label>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full" type="button" data-toast="已通过并进入下一题">通过并看下一题 →</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>27 发布确认 / 数据</h3><p>发布前再次确认公开边界</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="学习包发布确认原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>准备发布</h4><span></span></div>
+        <div class="phone__body no-nav">
+          <div class="empty-state" style="padding-top:18px;padding-bottom:18px"><div class="empty-state__icon">🏁</div><h5>15 道题全部审核完成</h5><p>答案、解析与证据已经过创建者确认。</p></div>
+          <div class="card green"><h5 class="card__title">发布检查通过</h5><p class="card__meta">✓ 15/15 题人工审核<br>✓ 每题有非空证据<br>✓ 原始文件不会公开<br>✓ 已显示 AI 辅助生成标识</p></div>
+          <div class="section-title"><h5>发布后</h5></div>
+          <div class="card soft"><p class="mb-0">任何人可通过分享链接挑战；创建者可暂停学习包或下线单题。已开始的作答保留原版本，不被静默覆盖。</p></div>
+          <div class="section-title"><h5>复习提醒</h5></div>
+          <div class="toggle-row"><span><strong>允许学员订阅提醒</strong><br><small class="text-muted">由学员主动授权 1 / 3 / 7 天提醒</small></span><button type="button" onclick="prototypeAction(event)" class="switch" data-toggle aria-pressed="true" aria-label="允许复习提醒"></button></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" id="publish-trigger" data-open-dialog="publish-dialog" type="button">发布学习包</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button" data-toast="草稿已保存">先保存草稿</button>
+        </div>
+        <dialog id="publish-dialog" aria-labelledby="publish-title"><div class="dialog__body"><h5 id="publish-title">确认公开发布？</h5><p>学习包名称、创建者名称、审核后的题目与必要证据摘要将公开。原始文件和私有文件名不会公开。</p><div class="button-row"><button onclick="prototypeAction(event)" class="btn" data-dialog-cancel data-dialog-close type="button">再检查一下</button><button onclick="prototypeAction(event)" class="btn btn--primary" data-dialog-close type="button">确认发布</button></div></div></dialog>
+      </section>
+    </article>
+  </main>
+  <script src="assets/prototype.js"></script>
+</body>
+</html>

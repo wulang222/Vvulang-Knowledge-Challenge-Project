@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 知识闯关小程序学习复盘中心 HTML 原型">
+  <title>学习复盘中心｜AI 知识闯关原型</title>
+  <link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到原型内容</a>
+  <header class="board-header"><div class="board-header__inner"><div class="board-title"><div class="board-title__mark">AI</div><div><h1>AI 知识闯关</h1><p>完整 HTML 原型 · 原创校园漫画风</p></div></div><nav class="board-nav" aria-label="原型分组"><a href="01-core-learning-flow.html">01 核心闯关</a><a href="02-study-review-center.html" aria-current="page">02 学习复盘</a><a href="03-sharing-creator.html">03 分享创作</a><a href="04-system-states.html">04 系统状态</a></nav></div></header>
+  <section class="board-intro" aria-labelledby="board-heading"><div><p class="eyebrow">REVIEW CENTER · 10—18</p><h2 id="board-heading">不把分数留在昨天，把薄弱点变成今天的任务</h2><p>本组覆盖学习中心、历史包、续答、错题本、今日复习、知识点详情、趋势、资料管理与本地恢复。</p></div><div class="review-badge">复习闭环<br>不是成绩单</div></section>
+
+  <main class="prototype-grid" id="content">
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>10 学习中心</h3><p>今天只显示最值得做的事</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="学习中心原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="个人资料">☻</button><h4>我的学习</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="日历">▦</button></div>
+        <div class="phone__body">
+          <div class="hero-copy"><span class="hero-copy__kicker">10 月 2 日 · 今天</span><h5>有 3 个知识点<br>该回来看看了</h5></div>
+          <div class="card yellow"><div class="card__title">今日复习 · 约 6 分钟</div><p class="card__meta">分类与回归、注意力机制、TCP 状态转换</p><button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-12" type="button" data-toast="已开始今日复习">开始今日复习 →</button></div>
+          <div class="section-title"><h5>本周状态</h5><button type="button" onclick="prototypeAction(event)" class="link-btn">查看趋势</button></div>
+          <div class="metric-strip"><div class="metric"><strong>4</strong><span>完成闯关</span></div><div class="metric"><strong>76%</strong><span>平均正确</span></div><div class="metric"><strong>7</strong><span>二次达标</span></div></div>
+          <div class="section-title"><h5>继续学习</h5><button type="button" onclick="prototypeAction(event)" class="link-btn">全部</button></div>
+          <button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">ML</span><span><span class="row-title">机器学习基础</span><span class="row-meta">第 6/10 题 · 24 小时内可恢复</span></span><span class="row-arrow">›</span></button>
+          <button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">计</span><span><span class="row-title">计算机网络重点</span><span class="row-meta">8/10 · 有 2 道错题</span></span><span class="row-arrow">›</span></button>
+        </div>
+        <nav class="bottom-nav" aria-label="小程序主导航"><button type="button" onclick="prototypeAction(event)"><span>⌂</span>闯关</button><button type="button" onclick="prototypeAction(event)" class="active"><span>▤</span>学习</button><button type="button" onclick="prototypeAction(event)"><span>☻</span>我的</button></nav>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>11 历史学习包</h3><p>搜索、筛选与空结果状态</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="历史学习包原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>历史学习包</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="筛选">≡</button></div>
+        <div class="phone__body no-nav" data-tabs-root>
+          <div class="search-wrap"><label><span class="hidden">搜索学习包</span><input class="text-input" type="search" value="机器" placeholder="搜索资料或知识点"></label><button type="button" onclick="prototypeAction(event)" class="icon-btn icon-btn--small search-clear" data-clear-search aria-label="清除搜索">×</button></div>
+          <div class="tabs" role="tablist"><button type="button" onclick="prototypeAction(event)" role="tab" data-tab="all-packages" aria-selected="true">全部 12</button><button type="button" onclick="prototypeAction(event)" role="tab" data-tab="unfinished" aria-selected="false">未完成 1</button><button type="button" onclick="prototypeAction(event)" role="tab" data-tab="completed" aria-selected="false">已完成 11</button></div>
+          <div class="tab-panel" id="all-packages" role="tabpanel">
+            <button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">ML</span><span><span class="row-title">机器学习基础</span><span class="row-meta">进行中 · 第 6/10 题</span></span><span class="status-pill warning">继续</span></button>
+            <button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">深</span><span><span class="row-title">深度学习面试笔记</span><span class="row-meta">82% · 2 个知识点待复习</span></span><span class="row-arrow">›</span></button>
+            <button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">AI</span><span><span class="row-title">AI 产品经理框架</span><span class="row-meta">90% · 已完成复测</span></span><span class="row-arrow">›</span></button>
+            <button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">网</span><span><span class="row-title">计算机网络重点</span><span class="row-meta">80% · 10 月 1 日</span></span><span class="row-arrow">›</span></button>
+          </div>
+          <div class="tab-panel" id="unfinished" role="tabpanel" hidden><button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">ML</span><span><span class="row-title">机器学习基础</span><span class="row-meta">已保存 6 道答案</span></span><span class="status-pill warning">继续</span></button></div>
+          <div class="tab-panel" id="completed" role="tabpanel" hidden><button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">深</span><span><span class="row-title">深度学习面试笔记</span><span class="row-meta">82% · 已完成</span></span><span class="row-arrow">›</span></button></div>
+          <p class="footnote center">显示最近 12 个学习包 · 下拉可加载更多</p>
+        </div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>12 学习包详情 / 续答</h3><p>恢复时说明保存范围</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="学习包详情原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>学习包详情</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="更多操作">•••</button></div>
+        <div class="phone__body no-nav">
+          <div class="card blue"><span class="status-pill warning">进行中</span><h5 class="card__title mt-8">机器学习基础</h5><p class="card__meta">来源：课堂笔记 · 创建于昨天 21:48</p><div class="progress mt-12"><span style="--progress:60%"></span></div><div class="progress-label"><span>已完成 6 题</span><strong>还剩 4 题</strong></div></div>
+          <div class="paper-note mt-16">上次停在“分类与回归”。已提交答案不会改变，未提交的选择也已保存在本机。</div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="已恢复到第 7 题">继续第 7 题 →</button>
+          <div class="section-title"><h5>关卡状态</h5></div>
+          <div class="card soft"><div class="mastery-row mt-0"><div class="mastery-row__top"><strong>监督学习的定义</strong><span class="status-pill success">已通过</span></div><div class="progress green"><span style="--progress:100%"></span></div></div></div>
+          <div class="card soft"><div class="mastery-row mt-0"><div class="mastery-row__top"><strong>标签与训练数据</strong><span class="status-pill success">已通过</span></div><div class="progress green"><span style="--progress:100%"></span></div></div></div>
+          <div class="card soft"><div class="mastery-row mt-0"><div class="mastery-row__top"><strong>分类与回归</strong><span class="status-pill warning">进行中</span></div><div class="progress"><span style="--progress:45%"></span></div></div></div>
+          <div class="section-title"><h5>资料与设置</h5></div>
+          <button type="button" onclick="prototypeAction(event)" class="recent-card"><span class="thumb">▣</span><span><span class="row-title">查看原始资料</span><span class="row-meta">1,286 字 · 仅本人可见</span></span><span class="row-arrow">›</span></button>
+          <button type="button" onclick="prototypeAction(event)" class="recent-card"><span class="thumb">⚙</span><span><span class="row-title">重新配置并出题</span><span class="row-meta">保留当前版本与作答记录</span></span><span class="row-arrow">›</span></button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>13 错题本</h3><p>按知识点处理，不按日期堆积</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="错题本原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>错题本</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="筛选错题">≡</button></div>
+        <div class="phone__body no-nav">
+          <div class="metric-strip"><div class="metric"><strong>12</strong><span>待掌握</span></div><div class="metric"><strong>7</strong><span>已回炉</span></div><div class="metric"><strong>4</strong><span>二次达标</span></div></div>
+          <div class="chip-row mt-16"><button type="button" onclick="prototypeAction(event)" class="chip" aria-pressed="true">全部</button><button type="button" onclick="prototypeAction(event)" class="chip">今天到期</button><button type="button" onclick="prototypeAction(event)" class="chip">有疑问</button></div>
+          <div class="section-title"><h5>分类与回归 · 2 题</h5><span class="status-pill danger">优先</span></div>
+          <div class="card red"><span class="question-type">概念混淆</span><h5 class="card__title mt-8">预测房价属于哪类任务？</h5><p class="card__meta">你选：分类 · 正确：回归</p><div class="button-row"><button onclick="prototypeAction(event)" class="btn" type="button">看解析</button><button onclick="prototypeAction(event)" class="btn btn--primary" type="button" data-toast="已加入本次重练">重练</button></div></div>
+          <div class="card"><span class="question-type">无把握猜测</span><h5 class="card__title mt-8">邮件识别任务的输出是什么？</h5><p class="card__meta">资料第 4 段 · 3 天前答错</p><div class="button-row"><button onclick="prototypeAction(event)" class="btn" type="button">看证据</button><button onclick="prototypeAction(event)" class="btn btn--primary" type="button" data-toast="已加入本次重练">重练</button></div></div>
+          <div class="section-title"><h5>注意力机制 · 1 题</h5><span class="status-pill warning">3 天后到期</span></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full" type="button" data-toast="已生成 3 道错题练习">重练本页 3 题 →</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>14 今日复习</h3><p>1 / 3 / 7 天节奏与单次任务</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="今日复习计划原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>今日复习</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="复习说明">?</button></div>
+        <div class="phone__body no-nav">
+          <div class="mascot-row"><div class="mascot" aria-hidden="true"><span class="mascot__head"><span class="mascot__face">•⌄•</span></span></div><div class="speech">今天只要 6 分钟。不是重新学一遍，只检查最容易忘的地方。</div></div>
+          <div class="card yellow"><h5 class="card__title">复习队列 · 5 题</h5><p class="card__meta">来自 3 个知识点，按遗忘风险排序。</p><div class="progress mt-12"><span style="--progress:0%"></span></div></div>
+          <ol class="timeline">
+            <li><strong>分类与回归 · 2 题</strong><span class="status-pill danger">昨天答错</span></li>
+            <li><strong>TCP 状态转换 · 2 题</strong><span class="status-pill warning">3 天复习</span></li>
+            <li><strong>注意力机制 · 1 题</strong><span class="status-pill">7 天复习</span></li>
+          </ol>
+          <div class="card blue"><h5 class="card__title">完成条件</h5><p class="card__meta">薄弱知识点连续答对 2 次，标记为“二次达标”。答错不会无限加题，最多补 2 题。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="今日复习已开始">开始 5 题复习 →</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button" data-toast="已调整到明天，不影响其他计划">今天实在来不及</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>15 知识点掌握详情</h3><p>事实、证据与行动放在一起</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="知识点掌握详情原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>分类与回归</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="更多">•••</button></div>
+        <div class="phone__body no-nav">
+          <div class="card red"><span class="status-pill danger">需要复习</span><h5 class="card__title mt-8">本次 4 题答对 2 题</h5><p class="card__meta">你能说出定义，但在真实例子中容易选错。</p><div class="progress red mt-12"><span style="--progress:48%"></span></div></div>
+          <div class="section-title"><h5>错误模式</h5></div>
+          <div class="chip-row"><span class="chip" aria-pressed="true">概念混淆 ×2</span><span class="chip">无把握猜测 ×1</span></div>
+          <div class="section-title"><h5>关键证据</h5></div>
+          <div class="evidence">“分类任务预测离散类别；回归任务预测连续数值。”<cite>机器学习基础 · 第 4 段</cite></div>
+          <div class="section-title"><h5>近期表现</h5></div>
+          <ol class="timeline"><li><strong>今天 · 变式题答对 1/2</strong><time>用时 1分24秒</time></li><li><strong>昨天 · 首次作答 1/2</strong><time>两题都选择“犹豫”</time></li></ol>
+          <div class="card yellow"><h5 class="card__title">下一步只做一件事</h5><p class="card__meta">先完成 2 道真实场景判断题。连续正确后，再安排 3 天复测。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="已生成两道场景题">练 2 道场景题 →</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>16 学习趋势</h3><p>趋势不夸大，一次答对不算掌握</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="学习趋势原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>学习趋势</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="选择时间范围">▦</button></div>
+        <div class="phone__body no-nav">
+          <div class="segmented three"><button type="button" onclick="prototypeAction(event)" class="segment">7 天</button><button type="button" onclick="prototypeAction(event)" class="segment active">30 天</button><button type="button" onclick="prototypeAction(event)" class="segment">全部</button></div>
+          <div class="section-title"><h5>有效掌握闭环</h5><button type="button" onclick="prototypeAction(event)" class="link-btn">指标说明</button></div>
+          <div class="metric-strip"><div class="metric"><strong>7</strong><span>二次达标</span></div><div class="metric"><strong>4</strong><span>完成学习包</span></div><div class="metric"><strong>42m</strong><span>主动练习</span></div></div>
+          <div class="card mt-16"><h5 class="card__title">每周完成关卡</h5><div class="bar-chart" role="img" aria-label="最近四周完成关卡数分别为 2、5、3、7"><div class="bar" style="--h:35%"><span>第1周</span></div><div class="bar" style="--h:70%"><span>第2周</span></div><div class="bar" style="--h:48%"><span>第3周</span></div><div class="bar" style="--h:92%"><span>本周</span></div></div></div>
+          <div class="section-title"><h5>知识点变化</h5></div>
+          <div class="card green"><div class="mastery-row mt-0"><div class="mastery-row__top"><strong>注意力机制</strong><span class="text-green">↑ 复测达标</span></div><p class="card__meta">从 52% 提升到 84%</p></div></div>
+          <div class="card red"><div class="mastery-row mt-0"><div class="mastery-row__top"><strong>分类与回归</strong><span class="text-red">↓ 需要复习</span></div><p class="card__meta">3 天后复测仍有 1 题错误</p></div></div>
+          <p class="footnote">数据只反映在本产品内的作答表现，不代表考试结果。</p>
+        </div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>17 资料管理</h3><p>隐私状态与删除入口清楚可见</p></div><span class="phase-tag phase-2">P1</span></header>
+      <section class="phone" aria-label="资料管理原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>资料管理</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="筛选">≡</button></div>
+        <div class="phone__body no-nav">
+          <div class="paper-note">资料默认仅本人可见。分享报告或挑战时，不公开原文和私有文件名。</div>
+          <div class="section-title"><h5>我的资料 · 8</h5><button type="button" onclick="prototypeAction(event)" class="link-btn">＋ 新增</button></div>
+          <button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">PDF</span><span><span class="row-title">机器学习期末重点.pdf</span><span class="row-meta">私有 · 10 页 · 2 个学习包</span></span><span class="row-arrow">›</span></button>
+          <button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">TXT</span><span><span class="row-title">AI 产品面试笔记</span><span class="row-meta">私有 · 3,420 字 · 1 个学习包</span></span><span class="row-arrow">›</span></button>
+          <button type="button" onclick="prototypeAction(event)" class="history-card"><span class="thumb">DOC</span><span><span class="row-title">TCP 状态机复习.docx</span><span class="row-meta">私有 · 6 页 · 3 个学习包</span></span><span class="row-arrow">›</span></button>
+          <div class="section-title"><h5>选中资料</h5></div>
+          <div class="card blue"><h5 class="card__title">机器学习期末重点.pdf</h5><p class="card__meta">上传于 10 月 1 日 21:42 · AI 已生成 18 道题</p><div class="button-row"><button onclick="prototypeAction(event)" class="btn" type="button">重新解析</button><button onclick="prototypeAction(event)" class="btn btn--danger" id="delete-material-trigger" data-open-dialog="delete-material-dialog" type="button">删除资料</button></div></div>
+        </div>
+        <dialog id="delete-material-dialog" aria-labelledby="delete-material-title"><div class="dialog__body"><h5 id="delete-material-title">删除这份资料？</h5><p>“机器学习期末重点.pdf”及未被公开学习包引用的衍生题目会进入删除流程。此操作无法撤销。</p><div class="button-row"><button onclick="prototypeAction(event)" class="btn" type="button" data-dialog-cancel data-dialog-close>保留资料</button><button onclick="prototypeAction(event)" class="btn btn--danger" type="button" data-dialog-close>删除资料</button></div></div></dialog>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>18 本地会话恢复</h3><p>恢复前告诉用户保存了什么</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="本地会话恢复原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="关闭">×</button><h4>发现未完成闯关</h4><span></span></div>
+        <div class="phone__body no-nav">
+          <div class="empty-state"><div class="empty-state__icon">📚</div><h5>上次做到第 6 题</h5><p>本机保存了资料、配置、题目和 6 道已提交答案。</p></div>
+          <div class="card yellow"><h5 class="card__title">机器学习基础</h5><p class="card__meta">保存于昨天 22:16 · 剩余 4 题 · 缓存还有 17 小时过期</p><div class="progress mt-12"><span style="--progress:60%"></span></div></div>
+          <div class="card blue mt-12"><h5 class="card__title">恢复后会怎样？</h5><p class="card__meta">从第 7 题继续。已经提交的答案保持锁定，不会静默修改。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="已恢复到第 7 题">继续上次闯关 →</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button" data-toast="已保留资料，稍后仍可恢复">暂时不继续</button>
+          <button onclick="prototypeAction(event)" class="link-btn btn--full mt-16 text-red" id="clear-session-trigger" data-open-dialog="clear-session-dialog" type="button">清除这次本地内容</button>
+        </div>
+        <dialog id="clear-session-dialog" aria-labelledby="clear-session-title"><div class="dialog__body"><h5 id="clear-session-title">清除本地进度？</h5><p>将删除本机保存的资料、题目和未完成进度，不影响已经完成的云端学习记录。</p><div class="button-row"><button onclick="prototypeAction(event)" class="btn" data-dialog-cancel data-dialog-close type="button">取消</button><button onclick="prototypeAction(event)" class="btn btn--danger" data-dialog-close type="button">清除本地内容</button></div></div></dialog>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+  </main>
+  <script src="assets/prototype.js"></script>
+</body>
+</html>

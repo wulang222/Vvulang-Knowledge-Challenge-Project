@@ -1,0 +1,13 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": ["prototypes"],
+  "locale": "zh-CN",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": ["Select/Listbox", "Form", "Scrollbar", "Toast"],
+  "ownership": {
+    "Select/Listbox": "native"
+  },
+  "requiredCommands": [],
+  "commands": {},
+  "evidence": {}
+}

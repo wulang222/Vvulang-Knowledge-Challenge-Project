@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 知识闯关小程序核心学习流程 HTML 原型">
+  <title>核心学习流程｜AI 知识闯关原型</title>
+  <link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到原型内容</a>
+  <header class="board-header">
+    <div class="board-header__inner">
+      <div class="board-title">
+        <div class="board-title__mark" aria-hidden="true">AI</div>
+        <div><h1>AI 知识闯关</h1><p>完整 HTML 原型 · 原创校园漫画风</p></div>
+      </div>
+      <nav class="board-nav" aria-label="原型分组">
+        <a href="01-core-learning-flow.html" aria-current="page">01 核心闯关</a>
+        <a href="02-study-review-center.html">02 学习复盘</a>
+        <a href="03-sharing-creator.html">03 分享创作</a>
+        <a href="04-system-states.html">04 系统状态</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="board-intro" aria-labelledby="board-heading">
+    <div>
+      <p class="eyebrow">CORE FLOW · 01—09</p>
+      <h2 id="board-heading">从一个问题，到一张真正能行动的复习单</h2>
+      <p>本组覆盖首页、问题/文本输入、知识点确认、AI 生成、关卡地图、答题、证据解析、动态补题与通关报告。</p>
+    </div>
+    <div class="review-badge">A + 1<br>已确认</div>
+  </section>
+
+  <main class="prototype-grid" id="content">
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>01 首页 / 快速开始</h3><p>3 分钟内进入首关</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="首页原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="打开个人中心">☻</button><h4>课间十分钟</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="查看通知">♢</button></div>
+        <div class="phone__body">
+          <div class="hero-copy"><span class="hero-copy__kicker">把“想知道”变成“答得出”</span><h5>今天想弄懂<br>什么？</h5><p>输入一句问题、一个主题，或放入资料。每道题都会写明依据。</p></div>
+          <div class="mascot-row">
+            <div class="mascot" aria-hidden="true"><span class="mascot__head"><span class="mascot__face">•‿•</span></span></div>
+            <div class="speech">一句“RAG 是什么？”也能开始；没有原文时，我去找可靠的官方资料。</div>
+          </div>
+          <button onclick="prototypeAction(event)" class="upload-zone" type="button" data-toast="已打开资料选择器">
+            <span><span class="upload-icon" aria-hidden="true">＋</span><strong>输入问题或粘贴资料</strong><small>一句话 / 学习主题 / 任意长度文本</small></span>
+          </button>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-12" type="button" data-toast="已填入：RAG 是什么？">用“RAG 是什么？”试一关 →</button>
+          <div class="section-title"><h5>接着上次学</h5><button onclick="prototypeAction(event)" class="link-btn" type="button">全部</button></div>
+          <button onclick="prototypeAction(event)" class="recent-card" type="button">
+            <span class="thumb" aria-hidden="true">🔎</span><span><span class="row-title">RAG 基础</span><span class="row-meta">做到第 6/10 题 · 昨天 22:16</span></span><span class="row-arrow">›</span>
+          </button>
+          <p class="privacy-note">🔒 默认仅你可见，分享不会带出原始资料。</p>
+        </div>
+        <nav class="bottom-nav" aria-label="小程序主导航"><button type="button" onclick="prototypeAction(event)" class="active"><span>⌂</span>闯关</button><button type="button" onclick="prototypeAction(event)"><span>▤</span>学习</button><button type="button" onclick="prototypeAction(event)"><span>☻</span>我的</button></nav>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>02 问题 / 资料输入</h3><p>一句话或长资料都能开始</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="问题和资料输入及闯关配置原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>准备闯关</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" id="privacy-trigger" data-open-dialog="privacy-dialog" aria-label="查看隐私说明">ⓘ</button></div>
+        <form class="phone__body" novalidate onsubmit="event.preventDefault()">
+          <label class="field">
+            <span class="field__label"><span>问题、主题或学习资料</span><span class="status-pill success">不限字数</span></span>
+            <textarea class="text-area resize-none" aria-describedby="learning-input-help">RAG 是什么？</textarea>
+            <span class="field__help" id="learning-input-help">一句话也可以。后端会判断这是问题还是原文，不会要求你凑字数。</span>
+          </label>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full" type="button" data-toast="已插入原文分隔线，可继续粘贴资料">＋ 继续粘贴原文</button>
+          <div class="section-title"><h5>这次做几题？</h5><span class="text-muted">约 6 分钟</span></div>
+          <div class="segmented" data-choice-group><button onclick="prototypeAction(event)" class="segment" type="button" data-choice aria-pressed="false">5 题 · 快速</button><button onclick="prototypeAction(event)" class="segment" type="button" data-choice aria-pressed="true">10 题 · 完整</button></div>
+          <div class="section-title"><h5>难度</h5><span class="text-muted">可混合</span></div>
+          <div class="segmented three"><button onclick="prototypeAction(event)" class="segment active" type="button">基础</button><button onclick="prototypeAction(event)" class="segment" type="button">混合</button><button onclick="prototypeAction(event)" class="segment" type="button">进阶</button></div>
+          <div class="section-title"><h5>题型</h5></div>
+          <div class="chip-row"><button onclick="prototypeAction(event)" class="chip" type="button" data-toggle aria-pressed="true">✓ 单选题</button><button onclick="prototypeAction(event)" class="chip" type="button" data-toggle aria-pressed="true">✓ 判断题</button></div>
+          <div class="card blue mt-16"><h5 class="card__title">来源策略 · 自动</h5><p class="card__meta">当前只有问题，将检索官方资料；如果粘贴原文，会优先依据原文，外部补充会单独标记。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="submit" data-toast="正在提取知识点">先看看会考什么 →</button>
+        </form>
+        <dialog id="privacy-dialog" aria-labelledby="privacy-title">
+          <div class="dialog__body"><h5 id="privacy-title">输入和检索怎么处理？</h5><p>内容会发送到后端和大模型服务；没有原文时，问题会用于检索公开官方资料。默认不公开，也不用于训练本项目模型。</p><p>后端会检查身份证、密码、密钥等敏感信息，发现风险会暂停生成并请你修改。</p><button onclick="prototypeAction(event)" class="btn btn--primary btn--full" type="button" data-dialog-cancel data-dialog-close>知道了</button></div>
+        </dialog>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>03 知识点确认</h3><p>先确认范围，再生成题目</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="知识点确认原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>会考这些</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="帮助">?</button></div>
+        <div class="phone__body no-nav">
+          <div class="mascot-row"><div class="mascot" aria-hidden="true"><span class="mascot__head"><span class="mascot__face">•ᴗ•</span></span></div><div class="speech">已从 3 份官方资料整理出 6 个知识点。题目会逐一标明来源。</div></div>
+          <div class="card blue"><span class="status-pill success">官方来源 3</span><h5 class="card__title mt-8">RAG 基础</h5><p class="card__meta">10 题 · 混合难度 · 预计 6–8 分钟</p></div>
+          <div class="section-title"><h5>知识点 6 个</h5><button onclick="prototypeAction(event)" class="link-btn" type="button" data-toast="已添加空白知识点">＋ 添加</button></div>
+          <div class="list-stack">
+            <div class="creator-row"><span class="thumb">1</span><span><span class="row-title">RAG 的定义</span><span class="row-meta">重要 · 建议 2 题</span></span><button type="button" onclick="prototypeAction(event)" class="icon-btn icon-btn--small" aria-label="标记重点">★</button></div>
+            <div class="creator-row"><span class="thumb">2</span><span><span class="row-title">检索与生成流程</span><span class="row-meta">重要 · 建议 2 题</span></span><button type="button" onclick="prototypeAction(event)" class="icon-btn icon-btn--small" aria-label="标记重点">☆</button></div>
+            <div class="creator-row"><span class="thumb">3</span><span><span class="row-title">外部知识库的作用</span><span class="row-meta">进阶 · 建议 2 题</span></span><button type="button" onclick="prototypeAction(event)" class="icon-btn icon-btn--small" aria-label="标记重点">★</button></div>
+            <div class="creator-row"><span class="thumb">4</span><span><span class="row-title">向量检索与相关性</span><span class="row-meta">基础 · 建议 2 题</span></span><button type="button" onclick="prototypeAction(event)" class="icon-btn icon-btn--small" aria-label="更多操作">•••</button></div>
+            <div class="creator-row"><span class="thumb">5</span><span><span class="row-title">优点与局限</span><span class="row-meta">进阶 · 建议 2 题</span></span><button type="button" onclick="prototypeAction(event)" class="icon-btn icon-btn--small" aria-label="更多操作">•••</button></div>
+          </div>
+          <p class="footnote">每道题都必须能在用户原文或已核验官方资料中找到证据；找不到就不出。</p>
+          <div class="button-row"><button onclick="prototypeAction(event)" class="btn" type="button">返回修改</button><button onclick="prototypeAction(event)" class="btn btn--primary" type="button" data-toast="开始生成 10 道题">确认并出题</button></div>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>04 AI 生成进度</h3><p>真实阶段，不伪造百分比</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="生成进度原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>出题中</h4><span></span></div>
+        <div class="phone__body no-nav">
+          <div class="loader" aria-hidden="true">✎</div>
+          <div class="center"><h5 class="card__title">正在把问题变成关卡</h5><p class="card__meta">可以切到后台，完成后会提醒你。</p></div>
+          <ol class="stage-list" aria-label="生成阶段">
+            <li class="stage done"><span class="stage__dot">✓</span><strong>理解输入与检查安全</strong><small>识别为“学习问题”</small></li>
+            <li class="stage done"><span class="stage__dot">✓</span><strong>检索可靠来源</strong><small>已读取 3 份官方资料</small></li>
+            <li class="stage done"><span class="stage__dot">✓</span><strong>规划考点</strong><small>提取 6 个知识点</small></li>
+            <li class="stage current"><span class="stage__dot">4</span><strong>生成与质量检查</strong><small>逐题核对答案、来源和证据</small></li>
+          </ol>
+          <div class="paper-note">慢一点，是因为正在读取官方资料并逐题核对出处。没有可靠依据的题不会端上来。</div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-progress-demo>演示阶段推进</button>
+          <button onclick="prototypeAction(event)" class="btn btn--ghost btn--full mt-12" type="button" data-toast="任务会继续在后台生成">先去别处看看</button>
+          <button onclick="prototypeAction(event)" class="link-btn btn--full mt-12" type="button">取消生成</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>05 关卡地图</h3><p>知识点就是路线，不做虚假升级</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="关卡地图原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回">‹</button><h4>RAG 基础</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="更多">•••</button></div>
+        <div class="phone__body">
+          <div class="card yellow"><h5 class="card__title">第 2 关：检索与生成</h5><p class="card__meta">连续答对 2 次，才算暂时掌握。</p><progress class="progress mt-8" aria-label="总进度" max="100" value="35">35%</progress></div>
+          <div class="map" role="img" aria-label="知识点关卡路线">
+            <div class="level done"><strong>RAG 定义</strong><span class="stars">★★★</span><span>已通过</span></div>
+            <div class="level current"><strong>检索与生成</strong><span class="stars">★★☆</span><span>现在挑战</span></div>
+            <div class="level"><strong>外部知识库</strong><span class="stars">☆☆☆</span><span>下一关</span></div>
+            <div class="level locked"><strong>优点与局限</strong><span>🔒 完成上一关</span></div>
+            <div class="level locked"><strong>Boss：综合判断</strong><span>🔒 还差 2 关</span></div>
+          </div>
+        </div>
+        <nav class="bottom-nav" aria-label="关卡操作"><button type="button" onclick="prototypeAction(event)"><span>☰</span>目录</button><button type="button" onclick="prototypeAction(event)" class="active"><span>⚑</span>路线</button><button type="button" onclick="prototypeAction(event)"><span>↻</span>错题</button></nav>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>06 单题作答</h3><p>一屏一题，未选不可提交</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="单选题作答原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="退出答题">×</button><h4>第 3 题</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="标记题目">☆</button></div>
+        <div class="phone__body no-nav">
+          <div class="quiz-progress"><progress class="progress" aria-label="答题进度" max="100" value="30">30%</progress><strong>3 / 10</strong></div>
+          <span class="question-type">单选 · RAG 定义</span>
+          <h5 class="question">RAG 在生成回答前，最关键的额外步骤是什么？</h5>
+          <p class="question-source">▣ 依据：Google Cloud 官方文档 · 提交后可看摘录</p>
+          <div class="choice-list" data-choice-group>
+            <button onclick="prototypeAction(event)" class="choice" data-choice aria-pressed="false" type="button"><span class="choice__key">A</span><span>把模型重新训练一遍</span><span class="choice__mark"></span></button>
+            <button onclick="prototypeAction(event)" class="choice" data-choice data-correct="true" aria-pressed="false" type="button"><span class="choice__key">B</span><span>从外部知识库检索与问题相关的信息</span><span class="choice__mark"></span></button>
+            <button onclick="prototypeAction(event)" class="choice" data-choice aria-pressed="false" type="button"><span class="choice__key">C</span><span>随机扩大模型的上下文长度</span><span class="choice__mark"></span></button>
+            <button onclick="prototypeAction(event)" class="choice" data-choice aria-pressed="false" type="button"><span class="choice__key">D</span><span>删除用户问题中的专业词汇</span><span class="choice__mark"></span></button>
+          </div>
+          <div class="confidence"><p>这题你有多确定？（可选）</p><div class="segmented three"><button onclick="prototypeAction(event)" class="segment" type="button">确定</button><button onclick="prototypeAction(event)" class="segment" type="button">犹豫</button><button onclick="prototypeAction(event)" class="segment" type="button">猜的</button></div></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full" type="button" data-submit-quiz disabled>确定答案</button>
+          <div class="answer-feedback" hidden>
+            <div class="result-callout"><strong tabindex="-1">答对了，依据也对得上</strong><p>RAG 会先检索相关外部信息，再把它作为上下文交给模型生成回答。</p></div>
+            <div class="evidence">“RAG 通过引用模型训练数据之外的权威知识库，改进大语言模型的输出。”<cite>Google Cloud · What is RAG? · 页面正文</cite><a class="source-link" href="https://cloud.google.com/use-cases/retrieval-augmented-generation" target="_blank" rel="noreferrer">查看官方文档 ↗</a></div>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>07 答错解析 / 证据</h3><p>原因、干扰项和来源分层呈现</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="答错解析和证据原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="返回题目">‹</button><h4>这题拆开看</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="反馈题目问题">!</button></div>
+        <div class="phone__body no-nav">
+          <div class="result-callout error"><strong>差一点：把“检索”记成了“重新训练”</strong><p>你选了 A，正确答案是 B。先看区别，再补一道基础题。</p></div>
+          <div class="center mt-16"><span class="stamp">有依据才放行</span></div>
+          <div class="section-title"><h5>为什么是 B？</h5></div>
+          <div class="card green"><p class="mb-0">官方资料明确说明：RAG 在生成前引用训练数据之外的权威知识库，不要求重新训练基础模型。</p></div>
+          <div class="section-title"><h5>其他选项哪里不对？</h5></div>
+          <div class="card soft"><strong>A · 重新训练模型</strong><p class="card__meta mt-8">RAG 的重点是运行时检索并补充上下文，不等同于微调或重新训练模型。</p></div>
+          <details class="card blue mt-12" open><summary><strong>查看官方来源</strong></summary><div class="evidence">“先检索相关信息，再将检索结果加入提示上下文，由模型据此生成响应。”<cite>Google Cloud · What is RAG? · 页面正文</cite><a class="source-link" href="https://cloud.google.com/use-cases/retrieval-augmented-generation" target="_blank" rel="noreferrer">查看官方文档 ↗</a></div></details>
+          <div class="section-title"><h5>你可能卡在</h5></div>
+          <div class="chip-row"><span class="chip" aria-pressed="true">概念混淆</span><span class="chip">忽略关键词</span></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-toast="已安排一题更基础的变式题">补一题，把它弄懂 →</button>
+          <button onclick="prototypeAction(event)" class="link-btn btn--full mt-12" type="button">这道题有问题</button>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>08 动态补题</h3><p>降低难度，最多补两题</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="动态补题原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="稍后再练">×</button><h4>补强题 1 / 2</h4><span></span></div>
+        <div class="phone__body no-nav">
+          <div class="paper-note">不是惩罚题：这题更基础，只确认你能不能分清“检索增强”和“重新训练”。</div>
+          <div class="quiz-progress mt-16"><progress class="progress red" aria-label="当前知识点掌握分" max="100" value="40">40%</progress><strong>暂未掌握</strong></div>
+          <span class="question-type">基础变式 · RAG 流程</span>
+          <h5 class="question">系统先查官方文档，再把相关片段交给大模型回答，这属于什么？</h5>
+          <div class="choice-list" data-choice-group>
+            <button onclick="prototypeAction(event)" class="choice" data-choice aria-pressed="false" type="button"><span class="choice__key">A</span><span>重新训练，因为使用了新资料</span><span class="choice__mark"></span></button>
+            <button onclick="prototypeAction(event)" class="choice" data-choice data-correct="true" aria-pressed="false" type="button"><span class="choice__key">B</span><span>RAG，因为先检索再生成</span><span class="choice__mark"></span></button>
+          </div>
+          <div class="card blue mt-16"><h5 class="card__title">达标规则</h5><p class="card__meta">本题答对后，再确认 1 题；连续两次正确才标记“暂时掌握”。最多补 2 题，避免无限循环。</p></div>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full mt-16" type="button" data-submit-quiz disabled>确定答案</button>
+          <div class="answer-feedback" hidden><div class="result-callout"><strong tabindex="-1">这次分清了</strong><p>检索相关资料 → 补充上下文 → 生成回答。再答对一题就暂时达标。</p></div></div>
+        </div>
+      </section>
+    </article>
+
+    <article class="prototype">
+      <header class="prototype__meta"><div><h3>09 通关报告</h3><p>分数之后，先给行动</p></div><span class="phase-tag">P0</span></header>
+      <section class="phone" aria-label="通关报告原型">
+        <div class="statusbar"><span data-time>09:41</span><span class="statusbar__icons">● ◔ ▰</span></div>
+        <div class="appbar"><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="关闭报告">×</button><h4>本次通关报告</h4><button type="button" onclick="prototypeAction(event)" class="icon-btn" aria-label="分享报告">↗</button></div>
+        <div class="phone__body no-nav">
+          <div class="score-hero"><div class="score-hero__number">8<span style="font-size:24px">/10</span></div><div class="score-hero__label">RAG 基本流程稳住了，来源边界还需确认</div></div>
+          <div class="score-stats"><div class="stat"><strong>80%</strong><span>正确率</span></div><div class="stat"><strong>06:42</strong><span>总用时</span></div><div class="stat"><strong>4</strong><span>最高连对</span></div></div>
+          <div class="section-title"><h5>先复习这 2 个</h5><button onclick="prototypeAction(event)" class="link-btn" type="button">全部知识点</button></div>
+          <div class="card red"><div class="mastery-row mt-0"><div class="mastery-row__top"><strong>检索与重新训练的区别</strong><span class="status-pill danger">需要复习</span></div><div class="progress red"><span style="--progress:45%"></span></div></div><p class="card__meta mt-8">2 题答错 1 题，补题后仍有一次犹豫。</p></div>
+          <div class="card yellow"><div class="mastery-row mt-0"><div class="mastery-row__top"><strong>来源质量与时效</strong><span class="status-pill warning">暂时掌握</span></div><div class="progress"><span style="--progress:68%"></span></div></div><p class="card__meta mt-8">答对，但用时明显偏长。</p></div>
+          <div class="section-title"><h5>你的复习单</h5></div>
+          <ol class="timeline"><li><strong>现在 · 重练 2 道错题</strong><span>约 3 分钟</span></li><li><strong>3 天后 · 再测来源边界</strong><time>10 月 5 日</time></li><li><strong>7 天后 · 完整复测</strong><time>10 月 9 日</time></li></ol>
+          <button onclick="prototypeAction(event)" class="btn btn--primary btn--full" type="button" data-toast="已进入两道错题重练">先把 2 道错题拿下 →</button>
+          <div class="button-row"><button onclick="prototypeAction(event)" class="btn" type="button">再出一组</button><button onclick="prototypeAction(event)" class="btn" type="button">分享结果</button></div>
+          <p class="footnote">“掌握”仅描述本次表现，不代表长期记忆已经形成。</p>
+        </div>
+        <div class="toast" role="status" aria-live="polite"></div>
+      </section>
+    </article>
+  </main>
+  <script src="assets/prototype.js"></script>
+</body>
+</html>
