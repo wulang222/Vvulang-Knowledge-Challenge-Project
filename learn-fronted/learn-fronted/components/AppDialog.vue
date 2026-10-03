@@ -33,6 +33,7 @@ defineEmits<{ close: [] }>();
 	position: fixed;
 	inset: 0;
 	z-index: 100;
+	box-sizing: border-box;
 	display: grid;
 	place-items: center;
 	padding: 40rpx 34rpx calc(40rpx + env(safe-area-inset-bottom));
@@ -55,6 +56,7 @@ defineEmits<{ close: [] }>();
 .dialog {
 	position: relative;
 	width: min(100%, 660rpx);
+	box-sizing: border-box;
 	max-height: 82vh;
 	padding: 36rpx;
 	overflow-y: auto;

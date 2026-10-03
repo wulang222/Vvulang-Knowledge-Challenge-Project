@@ -41,6 +41,8 @@ defineEmits<{ press: [] }>();
 <style scoped>
 .app-button {
 	position: relative;
+	max-width: 100%;
+	box-sizing: border-box;
 	min-height: 96rpx;
 	padding: 20rpx 30rpx;
 	border: 4rpx solid var(--ink);

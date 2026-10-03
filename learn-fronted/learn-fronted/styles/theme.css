@@ -70,16 +70,24 @@ textarea:focus-visible {
 /* #endif */
 
 .page-shell {
+	width: 100%;
+	max-width: 100%;
 	min-height: 100vh;
+	box-sizing: border-box;
 	padding-bottom: calc(44rpx + env(safe-area-inset-bottom));
 }
 
 .page-body {
 	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
 	padding: 28rpx 34rpx 48rpx;
 }
 
 .card {
+	max-width: 100%;
+	box-sizing: border-box;
 	padding: 28rpx;
 	border: 4rpx solid var(--ink);
 	border-radius: 28rpx;
@@ -120,7 +128,9 @@ textarea:focus-visible {
 }
 
 .section-title {
+	min-width: 0;
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
 	gap: 20rpx;
@@ -131,6 +141,7 @@ textarea:focus-visible {
 }
 
 .status-pill {
+	box-sizing: border-box;
 	display: inline-flex;
 	align-items: center;
 	min-height: 42rpx;
@@ -158,6 +169,8 @@ textarea:focus-visible {
 }
 
 .paper-note {
+	max-width: 100%;
+	box-sizing: border-box;
 	padding: 22rpx 26rpx;
 	transform: rotate(-1deg);
 	border: 3rpx solid var(--ink);
@@ -180,6 +193,8 @@ textarea:focus-visible {
 }
 
 .result-callout {
+	max-width: 100%;
+	box-sizing: border-box;
 	padding: 26rpx;
 	border: 4rpx solid var(--green);
 	border-radius: 24rpx;
@@ -216,6 +231,7 @@ textarea:focus-visible {
 }
 
 .header-action-button {
+	box-sizing: border-box;
 	width: 84rpx;
 	min-height: 84rpx;
 	padding: 0;

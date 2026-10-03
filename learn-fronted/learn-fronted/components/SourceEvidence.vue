@@ -33,6 +33,8 @@ function copyUrl() {
 
 <style scoped>
 .evidence {
+	max-width: 100%;
+	box-sizing: border-box;
 	margin-top: 24rpx;
 	padding: 24rpx;
 	border-left: 8rpx solid var(--blue);
@@ -44,6 +46,7 @@ function copyUrl() {
 	display: block;
 	font-size: 27rpx;
 	line-height: 1.7;
+	overflow-wrap: anywhere;
 }
 .evidence__source {
 	display: block;
@@ -51,6 +54,7 @@ function copyUrl() {
 	color: var(--muted);
 	font-family: var(--font-body);
 	font-size: 22rpx;
+	overflow-wrap: anywhere;
 }
 
 .evidence__link {

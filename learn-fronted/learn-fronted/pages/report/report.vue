@@ -186,11 +186,13 @@ function backToInput() {
 }
 .score-stats {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 16rpx;
 	margin-top: 28rpx;
 }
 .stat {
+	min-width: 0;
+	box-sizing: border-box;
 	padding: 20rpx 10rpx;
 	border: 3rpx solid var(--line);
 	border-radius: 20rpx;
@@ -202,6 +204,7 @@ function backToInput() {
 	font-family: var(--font-display);
 	font-size: 38rpx;
 	font-weight: 900;
+	overflow-wrap: anywhere;
 }
 .stat__label {
 	color: var(--muted);
@@ -218,7 +221,9 @@ function backToInput() {
 	gap: 16rpx;
 }
 .mastery-card__name {
+	min-width: 0;
 	font-weight: 900;
+	overflow-wrap: anywhere;
 }
 .mastery-progress {
 	height: 18rpx;
@@ -278,7 +283,10 @@ function backToInput() {
 	font-weight: 900;
 }
 .timeline__copy {
+	display: block;
+	min-width: 0;
 	font-weight: 800;
+	overflow-wrap: anywhere;
 }
 .footnote {
 	display: block;

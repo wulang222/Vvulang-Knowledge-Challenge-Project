@@ -258,6 +258,8 @@ function discardDraft() {
 	font-size: 35rpx !important;
 }
 .restore-card {
+	min-width: 0;
+	box-sizing: border-box;
 	margin-bottom: 26rpx;
 	padding: 22rpx;
 	display: flex;
@@ -270,6 +272,7 @@ function discardDraft() {
 }
 .restore-card__title {
 	display: block;
+	overflow-wrap: anywhere;
 	font-weight: 900;
 }
 .restore-card__meta {
@@ -277,6 +280,7 @@ function discardDraft() {
 	margin-top: 4rpx;
 	color: var(--muted);
 	font-size: 22rpx;
+	overflow-wrap: anywhere;
 }
 .restore-card__actions {
 	display: flex;
@@ -317,6 +321,7 @@ function discardDraft() {
 	display: block;
 	color: var(--muted);
 	font-size: 27rpx;
+	overflow-wrap: anywhere;
 }
 .mascot-row {
 	display: flex;
@@ -326,6 +331,7 @@ function discardDraft() {
 }
 .mascot {
 	flex: none;
+	box-sizing: border-box;
 	width: 112rpx;
 	height: 102rpx;
 	display: grid;
@@ -341,6 +347,8 @@ function discardDraft() {
 }
 .speech {
 	flex: 1;
+	min-width: 0;
+	box-sizing: border-box;
 	padding: 20rpx 24rpx;
 	border: 4rpx solid var(--ink);
 	border-radius: 26rpx;
@@ -348,6 +356,7 @@ function discardDraft() {
 	font-family: var(--font-note);
 	font-size: 25rpx;
 	font-weight: 700;
+	overflow-wrap: anywhere;
 }
 .field {
 	margin-top: 24rpx;
@@ -355,6 +364,7 @@ function discardDraft() {
 .field__label {
 	margin-bottom: 12rpx;
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
 	gap: 16rpx;
@@ -363,6 +373,8 @@ function discardDraft() {
 }
 .textarea-wrap {
 	position: relative;
+	max-width: 100%;
+	box-sizing: border-box;
 	border: 4rpx solid var(--ink);
 	border-radius: 22rpx;
 	background: var(--surface);
@@ -384,6 +396,7 @@ function discardDraft() {
 	bottom: 12rpx;
 	min-width: 84rpx;
 	min-height: 64rpx;
+	box-sizing: border-box;
 	padding: 8rpx 12rpx;
 	border: 0;
 	border-radius: 14rpx;
@@ -401,12 +414,15 @@ function discardDraft() {
 	margin-top: 10rpx;
 	color: var(--muted);
 	font-size: 22rpx;
+	overflow-wrap: anywhere;
 }
 .field__help--error {
 	color: var(--red);
 }
 .example-button {
 	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 	min-height: 88rpx;
 	margin-top: 18rpx;
 	border: 3rpx solid var(--line);
@@ -422,6 +438,7 @@ function discardDraft() {
 	border: 0;
 }
 .section-caption {
+	flex: none;
 	color: var(--muted);
 	font-family: var(--font-body);
 	font-size: 22rpx;
@@ -429,10 +446,12 @@ function discardDraft() {
 }
 .segmented {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 16rpx;
 }
 .segment {
+	min-width: 0;
+	box-sizing: border-box;
 	min-height: 88rpx;
 	padding: 16rpx;
 	border: 3rpx solid var(--line);
@@ -455,6 +474,8 @@ function discardDraft() {
 	gap: 14rpx;
 }
 .chip {
+	max-width: 100%;
+	box-sizing: border-box;
 	min-height: 72rpx;
 	padding: 10rpx 22rpx;
 	border: 3rpx solid var(--line);
@@ -465,8 +486,10 @@ function discardDraft() {
 	font-weight: 800;
 }
 .source-copy {
+	display: block;
 	color: var(--muted);
 	font-size: 24rpx;
+	overflow-wrap: anywhere;
 }
 .privacy-note {
 	display: block;

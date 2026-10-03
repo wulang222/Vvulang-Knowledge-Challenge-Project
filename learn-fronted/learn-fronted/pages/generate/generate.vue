@@ -76,6 +76,7 @@ function cancel() {
 
 <style scoped>
 .loader {
+	box-sizing: border-box;
 	width: 156rpx;
 	height: 156rpx;
 	margin: 48rpx auto 34rpx;
@@ -98,6 +99,7 @@ function cancel() {
 	margin-top: 10rpx;
 	color: var(--muted);
 	font-size: 25rpx;
+	overflow-wrap: anywhere;
 }
 .stage-list {
 	margin: 42rpx 0;
@@ -144,12 +146,14 @@ function cancel() {
 .stage__title {
 	display: block;
 	font-weight: 900;
+	overflow-wrap: anywhere;
 }
 .stage__meta {
 	display: block;
 	margin-top: 5rpx;
 	color: var(--muted);
 	font-size: 23rpx;
+	overflow-wrap: anywhere;
 }
 @keyframes loader-wobble {
 	50% {

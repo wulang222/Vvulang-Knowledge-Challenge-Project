@@ -319,10 +319,12 @@ function exitToInput() {
 }
 .choice {
 	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 	min-height: 128rpx;
 	padding: 20rpx 24rpx;
 	display: grid;
-	grid-template-columns: 68rpx 1fr 40rpx;
+	grid-template-columns: 68rpx minmax(0, 1fr) 40rpx;
 	align-items: center;
 	gap: 20rpx;
 	border: 4rpx solid var(--line);
@@ -360,8 +362,10 @@ function exitToInput() {
 	font-weight: 900;
 }
 .choice__text {
+	min-width: 0;
 	font-size: 28rpx;
 	line-height: 1.5;
+	overflow-wrap: anywhere;
 }
 .choice__mark {
 	font-size: 30rpx;
@@ -380,10 +384,12 @@ function exitToInput() {
 }
 .confidence__choices {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 14rpx;
 }
 .confidence-button {
+	min-width: 0;
+	box-sizing: border-box;
 	min-height: 80rpx;
 	border: 3rpx solid var(--line);
 	border-radius: 20rpx;
