@@ -215,8 +215,28 @@ textarea:focus-visible {
 	text-align: center;
 }
 
+.header-action-button {
+	width: 84rpx;
+	min-height: 84rpx;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	color: var(--ink);
+	background: transparent;
+	font-size: 44rpx;
+	cursor: pointer;
+}
+
+.header-action-button::after {
+	border: 0;
+}
+
+.header-action-button:active {
+	background: rgba(77, 120, 184, 0.12);
+}
+
+/* #ifdef H5 */
 @media (prefers-reduced-motion: reduce) {
-	/* #ifdef H5 */
 	*,
 	*::before,
 	*::after {
@@ -224,7 +244,6 @@ textarea:focus-visible {
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.001ms !important;
 	}
-	/* #endif */
 }
 
 @media (forced-colors: active) {
@@ -234,3 +253,4 @@ textarea:focus-visible {
 		box-shadow: none;
 	}
 }
+/* #endif */

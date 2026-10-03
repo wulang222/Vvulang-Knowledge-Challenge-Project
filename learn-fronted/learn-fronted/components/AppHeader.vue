@@ -40,8 +40,7 @@ defineEmits<{ back: [] }>();
 	align-items: center;
 }
 
-.app-header__icon,
-.app-header__action :deep(button) {
+.app-header__icon {
 	width: 84rpx;
 	min-height: 84rpx;
 	padding: 0;
@@ -53,12 +52,10 @@ defineEmits<{ back: [] }>();
 	cursor: pointer;
 }
 
-.app-header__icon::after,
-.app-header__action :deep(button)::after {
+.app-header__icon::after {
 	border: 0;
 }
-.app-header__icon:active,
-.app-header__action :deep(button):active {
+.app-header__icon:active {
 	background: rgba(77, 120, 184, 0.12);
 }
 .app-header__placeholder {

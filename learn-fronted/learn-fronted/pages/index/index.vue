@@ -3,7 +3,7 @@
 		<AppHeader title="准备闯关">
 			<template #action>
 				<button
-					class="header-info"
+					class="header-action-button header-info"
 					aria-label="查看隐私说明"
 					@click="privacyOpen = true"
 				>

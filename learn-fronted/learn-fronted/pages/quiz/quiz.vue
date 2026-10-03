@@ -3,7 +3,7 @@
 		<AppHeader :title="`第 ${store.currentIndex + 1} 题`">
 			<template #action
 				><button
-					class="exit-button"
+					class="header-action-button exit-button"
 					aria-label="退出答题"
 					@click="exitDialogOpen = true"
 				>

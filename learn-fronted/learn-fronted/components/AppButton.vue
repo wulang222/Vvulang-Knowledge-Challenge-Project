@@ -1,7 +1,13 @@
 <template>
 	<button
 		class="app-button"
-		:class="[`app-button--${variant}`, { 'app-button--full': full }]"
+		:class="[
+			`app-button--${variant}`,
+			{
+				'app-button--full': full,
+				'app-button--disabled': disabled || busy,
+			},
+		]"
 		:disabled="disabled || busy"
 		:aria-busy="busy ? 'true' : 'false'"
 		@click="$emit('press')"
@@ -71,11 +77,11 @@ defineEmits<{ press: [] }>();
 	border-color: var(--red);
 	box-shadow: 4rpx 4rpx 0 var(--red);
 }
-.app-button:active:not([disabled]) {
+.app-button:active {
 	transform: translate(4rpx, 4rpx);
 	box-shadow: none;
 }
-.app-button[disabled] {
+.app-button--disabled {
 	cursor: not-allowed;
 	opacity: 0.48;
 	box-shadow: none;
