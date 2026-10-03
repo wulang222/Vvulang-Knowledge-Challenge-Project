@@ -4,3 +4,5 @@ unpackage/
 node_modules/
 coverage/
 premium-audit.json
+.cloudbase/
+project.private.config.json

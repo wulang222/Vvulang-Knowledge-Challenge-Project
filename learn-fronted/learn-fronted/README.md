@@ -5,8 +5,20 @@
 ## 本地运行
 
 1. 在 HBuilderX 中打开本目录。
-2. 复制 `.env.config` 为 `.env.local`，按需修改后端地址。
-3. 运行到浏览器或微信开发者工具。
+2. 复制 `.env.example` 为 `.env.local`，按需修改后端地址。
+3. 在 HBuilderX 中选择“运行 → 运行到小程序模拟器 → 微信开发者工具”。
+
+## 微信开发者工具
+
+本目录是 uni-app 源码，源码中不会直接存在 `app.json`。开发模式的原生微信小程序代码由 HBuilderX 生成到：
+
+```text
+unpackage/dist/dev/mp-weixin
+```
+
+完成一次微信编译后，必须把上面的编译产物目录导入微信开发者工具，不能导入当前 uni-app 源码目录，否则开发者工具会提示找不到 `app.json`。
+
+如果清理过 `unpackage`，需要先在 HBuilderX 重新运行到微信开发者工具。正式发行产物位于 `unpackage/dist/build/mp-weixin`，应直接导入该发行目录。
 
 后端默认地址为 `http://127.0.0.1:8000`。发布到微信小程序前，需要将 API 部署为 HTTPS，并在微信公众平台配置 request 合法域名。
 
